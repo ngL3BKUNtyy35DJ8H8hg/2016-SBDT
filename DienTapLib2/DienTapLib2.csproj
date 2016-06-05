@@ -1,0 +1,125 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D730328-ECC9-4BE7-B9E4-486C9F266D53}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DienTapLib</RootNamespace>
+    <AssemblyName>DienTapLib</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.Direct3D, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.Direct3DX, Version=1.0.2911.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.DirectSound, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XuLyKHLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CAct.cs" />
+    <Compile Include="CActDef.cs" />
+    <Compile Include="CActDefs.cs" />
+    <Compile Include="CActObj.cs" />
+    <Compile Include="CAppear.cs" />
+    <Compile Include="CAppearA.cs" />
+    <Compile Include="CAppearDef.cs" />
+    <Compile Include="CAppearDown.cs" />
+    <Compile Include="CAppearLeft.cs" />
+    <Compile Include="CAppearUp.cs" />
+    <Compile Include="CBillboard.cs" />
+    <Compile Include="CBillboardMesh.cs" />
+    <Compile Include="CBlink.cs" />
+    <Compile Include="CBlinkDef.cs" />
+    <Compile Include="CBombardO2P.cs" />
+    <Compile Include="CBoombard.cs" />
+    <Compile Include="CBoombardFromDef.cs" />
+    <Compile Include="CCommentDef.cs" />
+    <Compile Include="CCornerTitle.cs" />
+    <Compile Include="CCornerTitleDef.cs" />
+    <Compile Include="CDescription.cs" />
+    <Compile Include="CDescriptionDef.cs" />
+    <Compile Include="CDisappear.cs" />
+    <Compile Include="CDisappearA.cs" />
+    <Compile Include="CDisappearDown.cs" />
+    <Compile Include="CDisappearLeft.cs" />
+    <Compile Include="CDisappearUp.cs" />
+    <Compile Include="CExplodeBbObj.cs" />
+    <Compile Include="CExplodeDcl.cs" />
+    <Compile Include="CExplodeDclDef.cs" />
+    <Compile Include="CExplodeMObj.cs" />
+    <Compile Include="CExplodeObj.cs" />
+    <Compile Include="CExplodeObjDef.cs" />
+    <Compile Include="CFly.cs" />
+    <Compile Include="CFocusAt.cs" />
+    <Compile Include="CFocusAtDef.cs" />
+    <Compile Include="CHelper.cs" />
+    <Compile Include="CHide.cs" />
+    <Compile Include="CMnu.cs" />
+    <Compile Include="CMnuDef.cs" />
+    <Compile Include="CMnuItem.cs" />
+    <Compile Include="CModel.cs" />
+    <Compile Include="CModelMesh.cs" />
+    <Compile Include="CMove.cs" />
+    <Compile Include="CMoveObjDef.cs" />
+    <Compile Include="CMoveTexObj.cs" />
+    <Compile Include="CRay.cs" />
+    <Compile Include="CRunActs.cs" />
+    <Compile Include="CScript.cs" />
+    <Compile Include="CScriptDef.cs" />
+    <Compile Include="CShoot.cs" />
+    <Compile Include="CShootFrom.cs" />
+    <Compile Include="CShootFromDef.cs" />
+    <Compile Include="CShootO2P.cs" />
+    <Compile Include="CSound.cs" />
+    <Compile Include="CSounds.cs" />
+    <Compile Include="CSpin.cs" />
+    <Compile Include="CSpinDef.cs" />
+    <Compile Include="CSpinTo.cs" />
+    <Compile Include="CSpinToBB.cs" />
+    <Compile Include="CSpinToDef.cs" />
+    <Compile Include="CSpriteObj.cs" />
+    <Compile Include="CSpriteTex.cs" />
+    <Compile Include="CTarget.cs" />
+    <Compile Include="CTerrain.cs" />
+    <Compile Include="CTerrainMesh.cs" />
+    <Compile Include="CTexObj.cs" />
+    <Compile Include="CThucHanh.cs" />
+    <Compile Include="CUnhide.cs" />
+    <Compile Include="DescPos.cs" />
+    <Compile Include="MyTimeSpan.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ray.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
