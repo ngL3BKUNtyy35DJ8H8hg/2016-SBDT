@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\Defas.def")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\Defas.def")>  _
         Public Property myDefaFileName() As String
             Get
                 Return CType(Me("myDefaFileName"),String)
@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\KHData.udl")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\KHData.udl")>  _
         Public Property myCacKyHieuUDL() As String
             Get
                 Return CType(Me("myCacKyHieuUDL"),String)
@@ -104,7 +104,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\BanDo.gst")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\BanDo.gst")>  _
         Public Property myMapGst() As String
             Get
                 Return CType(Me("myMapGst"),String)
@@ -116,7 +116,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\BanDoNho.gst")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\BanDoNho.gst")>  _
         Public Property myMapNhoGst() As String
             Get
                 Return CType(Me("myMapNhoGst"),String)
@@ -176,7 +176,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\LongThanh.jpg")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\LongThanh.jpg")>  _
         Public Property myTextureFile() As String
             Get
                 Return CType(Me("myTextureFile"),String)
@@ -248,7 +248,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\GridData.txt")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\GridData.txt")>  _
         Public Property myGridDataFile() As String
             Get
                 Return CType(Me("myGridDataFile"),String)
@@ -296,7 +296,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Map\D3DModelMesh.xml")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Map\D3DModelMesh.xml")>  _
         Public Property myFlag3DsFile() As String
             Get
                 Return CType(Me("myFlag3DsFile"),String)

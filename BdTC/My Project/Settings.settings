@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="myDefaFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\Defas.def</Value>
+      <Value Profile="(Default)">C:\Map\Defas.def</Value>
     </Setting>
     <Setting Name="myCacKyHieuUDL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\KHData.udl</Value>
+      <Value Profile="(Default)">C:\Map\KHData.udl</Value>
     </Setting>
     <Setting Name="myTenCT" Type="System.String" Scope="User">
       <Value Profile="(Default)">Bản đồ tác chiến</Value>
@@ -15,10 +15,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="myMapGst" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\BanDo.gst</Value>
+      <Value Profile="(Default)">C:\Map\BanDo.gst</Value>
     </Setting>
     <Setting Name="myMapNhoGst" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\BanDoNho.gst</Value>
+      <Value Profile="(Default)">C:\Map\BanDoNho.gst</Value>
     </Setting>
     <Setting Name="mySoPixelsPer1000m" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">312</Value>
@@ -33,7 +33,7 @@
       <Value Profile="(Default)">0.5</Value>
     </Setting>
     <Setting Name="myTextureFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\LongThanh.jpg</Value>
+      <Value Profile="(Default)">C:\Map\LongThanh.jpg</Value>
     </Setting>
     <Setting Name="my3DSoPixelsPer1000m" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">312</Value>
@@ -51,7 +51,7 @@
       <Value Profile="(Default)">10.7747964</Value>
     </Setting>
     <Setting Name="myGridDataFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\GridData.txt</Value>
+      <Value Profile="(Default)">C:\Map\GridData.txt</Value>
     </Setting>
     <Setting Name="myGRID_WIDTH" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">101</Value>
@@ -63,7 +63,7 @@
       <Value Profile="(Default)">4.5</Value>
     </Setting>
     <Setting Name="myFlag3DsFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Map\D3DModelMesh.xml</Value>
+      <Value Profile="(Default)">C:\Map\D3DModelMesh.xml</Value>
     </Setting>
   </Settings>
 </SettingsFile>
