@@ -87,52 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CBanDo.vb" />
-    <Compile Include="dlgEditMenu.Designer.vb">
-      <DependentUpon>dlgEditMenu.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgEditMenu.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgExplodeAction.Designer.vb">
-      <DependentUpon>dlgExplodeAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgExplodeAction.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgGetName.Designer.vb">
       <DependentUpon>dlgGetName.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgGetName.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgNewSaBan.Designer.vb">
-      <DependentUpon>dlgNewSaBan.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgNewSaBan.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgShootAction.Designer.vb">
-      <DependentUpon>dlgShootAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgShootAction.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgHideAction.Designer.vb">
-      <DependentUpon>dlgHideAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgHideAction.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgBlinkAction.Designer.vb">
-      <DependentUpon>dlgBlinkAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgBlinkAction.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgWipeAction.Designer.vb">
-      <DependentUpon>dlgWipeAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgWipeAction.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CSymbol.vb" />
@@ -142,12 +100,6 @@
       <DependentUpon>Dlg3DShow.vb</DependentUpon>
     </Compile>
     <Compile Include="Dlg3DShow.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgActions.Designer.vb">
-      <DependentUpon>dlgActions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgActions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgBanDoNho.designer.vb">
@@ -202,12 +154,6 @@
       <DependentUpon>dlgCopyKH.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCopyKH.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgFlyAction.Designer.vb">
-      <DependentUpon>dlgFlyAction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFlyAction.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgGetColor.Designer.vb">
@@ -302,45 +248,13 @@
     <Compile Include="UserSettings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlgEditMenu.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>dlgEditMenu.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgExplodeAction.resx">
-      <DependentUpon>dlgExplodeAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgGetName.resx">
       <SubType>Designer</SubType>
       <DependentUpon>dlgGetName.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewSaBan.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>dlgNewSaBan.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgShootAction.resx">
-      <DependentUpon>dlgShootAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgHideAction.resx">
-      <DependentUpon>dlgHideAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBlinkAction.resx">
-      <DependentUpon>dlgBlinkAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWipeAction.resx">
-      <DependentUpon>dlgWipeAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dlg3DShow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dlg3DShow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgActions.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>dlgActions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBanDoNho.resx">
       <DependentUpon>dlgBanDoNho.vb</DependentUpon>
@@ -377,10 +291,6 @@
     <EmbeddedResource Include="dlgCopyKH.resx">
       <SubType>Designer</SubType>
       <DependentUpon>dlgCopyKH.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgFlyAction.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>dlgFlyAction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGetColor.resx">
       <SubType>Designer</SubType>
@@ -599,6 +509,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FillUp.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BDTC.Actions\BDTC.Actions.vbproj">
+      <Project>{952C0039-2CA1-4BD5-AD08-E5934A316C7A}</Project>
+      <Name>BDTC.Actions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

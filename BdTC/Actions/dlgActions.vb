@@ -140,7 +140,7 @@ Public Class dlgActions
     End Sub
 
     Private Sub dlgActions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        fActions = Me
+        'fActions = Me
         Me.Text = "Các Kịch bản"
 
         'bMenuLoaded = True

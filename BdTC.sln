@@ -2,12 +2,17 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BdTC", "BdTC\BdTC.vbproj", "{7ABB39DE-9839-42A2-962C-98CC88A7618C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42} = {30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DienTapLib2", "DienTapLib2\DienTapLib2.csproj", "{9D730328-ECC9-4BE7-B9E4-486C9F266D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DienTapLib.ActionForms", "DienTapLib.ActionForms\DienTapLib.ActionForms.csproj", "{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaBan.Settings", "SaBan.Settings\SaBan.Settings.csproj", "{E572775C-825B-4E52-9278-A0963C085B75}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BDTC.FormMain", "BDTC.FormMain\BDTC.FormMain.vbproj", "{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BDTC.Actions", "BDTC.Actions\BDTC.Actions.vbproj", "{952C0039-2CA1-4BD5-AD08-E5934A316C7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,18 +36,24 @@ Global
 		{9D730328-ECC9-4BE7-B9E4-486C9F266D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D730328-ECC9-4BE7-B9E4-486C9F266D53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D730328-ECC9-4BE7-B9E4-486C9F266D53}.Release|x86.ActiveCfg = Release|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E49FC4A5-E9C8-4A59-9801-6CE73E5AEEE8}.Release|x86.ActiveCfg = Release|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E572775C-825B-4E52-9278-A0963C085B75}.Release|x86.ActiveCfg = Release|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C0FF29-7FE5-4CCD-9248-42BA5F2A2B42}.Release|x86.ActiveCfg = Release|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952C0039-2CA1-4BD5-AD08-E5934A316C7A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

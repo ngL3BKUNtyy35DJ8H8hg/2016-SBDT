@@ -7,6 +7,7 @@ Imports System.Drawing.Imaging
 Imports mySaBanLib
 Imports Microsoft.DirectX
 Imports Microsoft.DirectX.Direct3D
+Imports BdTC.Actions
 
 Public Class frmMain
     Private myPixelsPerGridX As Double
@@ -1732,14 +1733,53 @@ Public Class frmMain
         'myBando.StartBlinking()
     End Sub
 
+    ''' <summary>
+    ''' 2017-02-22
+    ''' CODEEDIT
+    ''' </summary>
+    ''' <param name="pActions"></param>
+    ''' <remarks></remarks>
     Public Sub ExportCacDT(ByVal pActions As List(Of CActionDef))
-        LoadSymbols()
+        '**********************************************************************
+        'Đoạn code lấy từ hàm ExportSounds của class dlgActions.vbb
+        Dim pFileName As String = mySaBanDir & "\D3DSounds.xml"
+        Dim SoundNames As Dictionary(Of String, String) = New Dictionary(Of String, String)
 
+        Dim mTexImage As Bitmap = New Bitmap(myTextureFile)
+        Dim g As Graphics = Graphics.FromImage(mTexImage)
+
+        Using sw As StreamWriter = New StreamWriter(pFileName)
+            sw.WriteLine("<Sounds>")
+            For Each aAction As CActionDef In pActions
+                Try
+                    Dim mSoundName As String = aAction.SoundName
+                    If mSoundName.Length > 0 Then
+                        SoundNames.Add(mSoundName, "sounds\" & mSoundName)
+                        sw.WriteLine("<Sound File=""" & "sounds\" & mSoundName & """ />")
+                    End If
+                Catch ex As Exception
+
+                End Try
+            Next
+            sw.WriteLine("</Sounds>")
+
+            sw.Close()
+        End Using
+        '**********************************************************************
+
+        LoadSymbols()
         ExportModels(mySaBanDir & "\D3DModels.xml")
         ExportBillboards(mySaBanDir & "\D3DBillboards.xml")
         ExportTexObjs(mySaBanDir & "\D3DTexObjs.xml", pActions)
     End Sub
 
+    ''' <summary>
+    ''' 2017-02-22
+    ''' CODEEDIT
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub MoTaDienBienToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoTaDienBienToolStripMenuItem.Click
         Dim fileReader As String = My.Computer.FileSystem.ReadAllText(mySaBanDefFileName)
         If fileReader.Length > 0 Then
@@ -1747,8 +1787,39 @@ Public Class frmMain
             mySaBanDir = fileReader
         End If
         Dim f As New dlgActions
+        f.mySurf2X = mySurf2X
+        f.mySurf2Y = mySurf2Y
+        f.myGRID_HEIGHT = myGRID_HEIGHT
+        f.myGRID_WIDTH = myGRID_WIDTH
+        f.mySaBanDefFileName = mySaBanDefFileName
+        f.mySaBanDir = mySaBanDir
+
         f.TopMost = True
         f.Show(mySaBanDir & "\MyMenu.xml", Me)
     End Sub
 
+
+    ''' <summary>
+    ''' 2017-02-22
+    ''' CODEEDIT
+    ''' </summary>
+    ''' <param name="ptxtKQ"></param>
+    ''' <param name="ptxtObjType"></param>
+    ''' <remarks></remarks>
+    Public Sub OnGetObjName(ByVal ptxtKQ As TextBox, ByVal ptxtObjType As TextBox)
+        myBando.OnGetObjName(ptxtKQ, ptxtObjType)
+    End Sub
+
+
+
+    ''' <summary>
+    ''' 2017-02-22
+    ''' CODEEDIT
+    ''' </summary>
+    ''' <param name="ptxtKQ"></param>
+    ''' <param name="pDoCao"></param>
+    ''' <remarks></remarks>
+    Public Sub OnGetTarget(ByVal ptxtKQ As TextBox, ByVal pDoCao As Single)
+        myBando.OnGetTarget(ptxtKQ, pDoCao)
+    End Sub
 End Class

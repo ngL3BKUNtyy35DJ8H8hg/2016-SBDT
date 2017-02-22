@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{952C0039-2CA1-4BD5-AD08-E5934A316C7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BDTC.Actions</RootNamespace>
+    <AssemblyName>BDTC.Actions</AssemblyName>
+    <MyType>Windows</MyType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>BDTC.Actions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>BDTC.Actions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.Direct3D.dll</HintPath>
+    </Reference>
+    <Reference Include="mySaBanLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BdTC\bin\x86\Debug\mySaBanLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.vb" />
+    <Compile Include="dlgActions.Designer.vb">
+      <DependentUpon>dlgActions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgActions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgBlinkAction.Designer.vb">
+      <DependentUpon>dlgBlinkAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgBlinkAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgEditMenu.Designer.vb">
+      <DependentUpon>dlgEditMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEditMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExplodeAction.Designer.vb">
+      <DependentUpon>dlgExplodeAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExplodeAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFlyAction.Designer.vb">
+      <DependentUpon>dlgFlyAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFlyAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGetName.Designer.vb">
+      <DependentUpon>dlgGetName.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGetName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgHideAction.Designer.vb">
+      <DependentUpon>dlgHideAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHideAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgNewSaBan.Designer.vb">
+      <DependentUpon>dlgNewSaBan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNewSaBan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgShootAction.Designer.vb">
+      <DependentUpon>dlgShootAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgShootAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWipeAction.Designer.vb">
+      <DependentUpon>dlgWipeAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWipeAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dlgActions.resx">
+      <DependentUpon>dlgActions.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBlinkAction.resx">
+      <DependentUpon>dlgBlinkAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEditMenu.resx">
+      <DependentUpon>dlgEditMenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExplodeAction.resx">
+      <DependentUpon>dlgExplodeAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFlyAction.resx">
+      <DependentUpon>dlgFlyAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGetName.resx">
+      <DependentUpon>dlgGetName.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideAction.resx">
+      <DependentUpon>dlgHideAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewSaBan.resx">
+      <DependentUpon>dlgNewSaBan.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgShootAction.resx">
+      <DependentUpon>dlgShootAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWipeAction.resx">
+      <DependentUpon>dlgWipeAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FillDown.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FillUp.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

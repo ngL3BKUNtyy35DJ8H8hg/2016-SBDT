@@ -1,4 +1,6 @@
-﻿Module myModule
+﻿Imports BdTC.Actions
+
+Module myModule
     Declare Function MoveWindow Lib "user32" _
     (ByVal hWnd As Integer, _
     ByVal x As Integer, ByVal y As Integer, _
@@ -13,7 +15,7 @@
 
     Public fMain As frmMain
 
-    Public fActions As dlgActions
+    'Public fActions As dlgActions
 
     Friend fCallForm As Form
 
