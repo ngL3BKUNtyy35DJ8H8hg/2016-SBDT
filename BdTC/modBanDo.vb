@@ -38,11 +38,16 @@ Module modBanDo
     Public Const myToolInfo As Integer = 3
     Public Const NHAPNHAYDELAY As Integer = 100
 
-    Public myDefaFileName As String = "Defas.def"
-    Public myNewBdTC As String = "New.bdtc"
-    Public LastBdTC As String = "New.bdtc"
+    '-- modBDTC --
+    'Public myDefaFileName As String = "Defas.def"
+    'Public myNewBdTC As String = "New.bdtc"
 
-    Public myTyLeKH2Map As Single = 1
+    '-- modSaBan --
+    'Public LastBdTC As String = "New.bdtc"
+
+    '-- modBDTC --
+    'Public myTyLeKH2Map As Single = 1
+
     Public mySoPixelsPer1000m As Integer = 312
     Public myTyLeLayKH As Single = 1
     Public myDaLayKH As Boolean = False
@@ -69,8 +74,10 @@ Module modBanDo
 
     Public myFlag3DsFile As String = "Flag3Ds.xml"
     Public myResourcePath As String
-    'Public myEffectFile As String
-    Public mySaBanDir As String = "SaBan1"
+
+    '-- modSaBan --
+    'Public mySaBanDir As String = "SaBan1"
+
     Public mySaBanDefFileName As String = "LastSaBan.def"
 
     Public myCacKyHieuUDL As String = "KHData.udl"
@@ -194,18 +201,20 @@ Module modBanDo
     'Public mySurf2X As Double = 2047D
     'Public mySurf2Y As Double = 2405D
 
-    Public my3DSoPixelsPer1000m As Integer = 312
+    '-- modSaBan --
+    'Public my3DSoPixelsPer1000m As Integer = 312
 
-    Public Function GetSurfPosition(ByVal pMapX As Double, ByVal pMapY As Double) As PointF
-        Dim kq As New PointF(0, 0)
-        Dim mdX, mdY As Double
+    '-- modSaBan --
+    'Public Function GetSurfPosition(ByVal pMapX As Double, ByVal pMapY As Double) As PointF
+    '    Dim kq As New PointF(0, 0)
+    '    Dim mdX, mdY As Double
 
-        mdX = (pMapX - myMap1X) * (mySurf2X - mySurf1X) / (myMap2X - myMap1X) + mySurf1X
-        mdY = (myMap1Y - pMapY) * (mySurf2Y - mySurf1Y) / (myMap1Y - myMap2Y) + mySurf1Y
-        kq.X = mdX '* myTyleTextureX
-        kq.Y = mdY '* myTyleTextureY
-        Return kq
-    End Function
+    '    mdX = (pMapX - myMap1X) * (mySurf2X - mySurf1X) / (myMap2X - myMap1X) + mySurf1X
+    '    mdY = (myMap1Y - pMapY) * (mySurf2Y - mySurf1Y) / (myMap1Y - myMap2Y) + mySurf1Y
+    '    kq.X = mdX '* myTyleTextureX
+    '    kq.Y = mdY '* myTyleTextureY
+    '    Return kq
+    'End Function
 
     Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PT3 As PointF, ByVal PT4 As PointF) As Object
         Dim mPT As PointF = Nothing
@@ -249,126 +258,128 @@ Module modBanDo
         End If
     End Function
 
-    Public Function GetIntersectPoints(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs() As PointF) As INTERSECTNODE()
-        Dim mINTERSECTNODEs() As INTERSECTNODE
-        Dim mINTERSECTNODE As Object
-        Dim j As Integer = -1
-        ReDim mINTERSECTNODEs(-1)
-        Dim i As Integer = 0
-        Do While i <= PTs.GetUpperBound(0)
-            mINTERSECTNODE = GetIntersectPoint(PT1, PT2, PTs, i)
-            If Not IsNothing(mINTERSECTNODE) Then
-                j += 1
-                ReDim Preserve mINTERSECTNODEs(j)
-                mINTERSECTNODEs(j) = CType(mINTERSECTNODE, INTERSECTNODE)
-                i = mINTERSECTNODEs(j).NodeIndex + 1
-            Else
-                Exit Do
-            End If
-        Loop
-        Return mINTERSECTNODEs
-    End Function
+    '-- modBDTC --
+    'Public Function GetIntersectPoints(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs() As PointF) As INTERSECTNODE()
+    '    Dim mINTERSECTNODEs() As INTERSECTNODE
+    '    Dim mINTERSECTNODE As Object
+    '    Dim j As Integer = -1
+    '    ReDim mINTERSECTNODEs(-1)
+    '    Dim i As Integer = 0
+    '    Do While i <= PTs.GetUpperBound(0)
+    '        mINTERSECTNODE = GetIntersectPoint(PT1, PT2, PTs, i)
+    '        If Not IsNothing(mINTERSECTNODE) Then
+    '            j += 1
+    '            ReDim Preserve mINTERSECTNODEs(j)
+    '            mINTERSECTNODEs(j) = CType(mINTERSECTNODE, INTERSECTNODE)
+    '            i = mINTERSECTNODEs(j).NodeIndex + 1
+    '        Else
+    '            Exit Do
+    '        End If
+    '    Loop
+    '    Return mINTERSECTNODEs
+    'End Function
 
-    Public Function AngleToPoint(ByVal Origin As PointF, ByVal Target As PointF) As Single
-        Dim Angle As Single
-        Target.X = Target.X - Origin.X
-        Target.Y = Target.Y - Origin.Y
-        Angle = Math.Atan2(Target.Y, Target.X) / (Math.PI / 180)
-        Return Angle
-    End Function
+    '-- modBDTC --
+    'Public Function AngleToPoint(ByVal Origin As PointF, ByVal Target As PointF) As Single
+    '    Dim Angle As Single
+    '    Target.X = Target.X - Origin.X
+    '    Target.Y = Target.Y - Origin.Y
+    '    Angle = Math.Atan2(Target.Y, Target.X) / (Math.PI / 180)
+    '    Return Angle
+    'End Function
 
-    Public Function ObjToCurve(ByVal pObj As GraphicObject) As GraphicObject
-        Dim gObj As GraphicObject = Nothing
+    'Public Function ObjToCurve(ByVal pObj As GraphicObject) As GraphicObject
+    '    Dim gObj As GraphicObject = Nothing
 
-        Select Case pObj.GetObjType
-            Case OBJECTTYPE.Line, OBJECTTYPE.Curve
-                Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
-                Dim mPath As GraphicsPath = mObj.GetPath()
-                mPath.Flatten(New Matrix, 0.5)
-                Dim pPts() As PointF = mPath.PathPoints
-                Dim myCurve As New CurveGraphic(pPts, 1, Color.Red)
-                myCurve.Rotation = 0
-                myCurve.LineColor = mObj.LineColor
-                myCurve.LineWidth = mObj.LineWidth
-                myCurve.Line2Color = mObj.Line2Color
-                myCurve.Line2Width = mObj.Line2Width
-                myCurve.Fill = mObj.Fill
-                myCurve.FillColor = mObj.FillColor
-                myCurve.LineStyle = mObj.LineStyle
-                gObj = myCurve
+    '    Select Case pObj.GetObjType
+    '        Case OBJECTTYPE.Line, OBJECTTYPE.Curve
+    '            Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
+    '            Dim mPath As GraphicsPath = mObj.GetPath()
+    '            mPath.Flatten(New Matrix, 0.5)
+    '            Dim pPts() As PointF = mPath.PathPoints
+    '            Dim myCurve As New CurveGraphic(pPts, 1, Color.Red)
+    '            myCurve.Rotation = 0
+    '            myCurve.LineColor = mObj.LineColor
+    '            myCurve.LineWidth = mObj.LineWidth
+    '            myCurve.Line2Color = mObj.Line2Color
+    '            myCurve.Line2Width = mObj.Line2Width
+    '            myCurve.Fill = mObj.Fill
+    '            myCurve.FillColor = mObj.FillColor
+    '            myCurve.LineStyle = mObj.LineStyle
+    '            gObj = myCurve
 
-            Case OBJECTTYPE.Polygon, OBJECTTYPE.ClosedCurve
-                Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
-                Dim mPath As GraphicsPath = mObj.GetPath()
-                mPath.Flatten(New Matrix, 0.5)
-                Dim pPts() As PointF = mPath.PathPoints
-                Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
-                myCurve.Rotation = 0
-                myCurve.LineColor = mObj.LineColor
-                myCurve.LineWidth = mObj.LineWidth
-                myCurve.Line2Color = mObj.Line2Color
-                myCurve.Line2Width = mObj.Line2Width
-                myCurve.Fill = mObj.Fill
-                myCurve.FillColor = mObj.FillColor
-                myCurve.LineStyle = mObj.LineStyle
-                gObj = myCurve
-            Case OBJECTTYPE.Ellipse, OBJECTTYPE.Cycle
-                Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
-                Dim mPath As GraphicsPath = mObj.GetPath()
-                mPath.Flatten(New Matrix, 0.5)
-                Dim pPts() As PointF = mPath.PathPoints
-                Dim j As Integer = pPts.GetUpperBound(0)
-                ReDim Preserve pPts(j - 1)
-                Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
-                myCurve.Rotation = 0
-                myCurve.LineColor = mObj.LineColor
-                myCurve.LineWidth = mObj.LineWidth
-                myCurve.Line2Color = mObj.Line2Color
-                myCurve.Line2Width = mObj.Line2Width
-                myCurve.Fill = mObj.Fill
-                myCurve.LineStyle = mObj.LineStyle
-                myCurve.FillColor = mObj.FillColor
-                gObj = myCurve
-            Case OBJECTTYPE.Pie
-                Dim mObj As PieGraphic = CType(pObj, PieGraphic)
-                Dim mPath As GraphicsPath = mObj.GetPath()
-                mPath.Flatten(New Matrix, 0.5)
-                Dim pPts() As PointF = mPath.PathPoints
-                If mObj.IsArc = True Then
-                    Dim myCurve As New CurveGraphic(pPts, 1, Color.Red)
-                    myCurve.Rotation = 0
-                    myCurve.LineColor = mObj.LineColor
-                    myCurve.LineWidth = mObj.LineWidth
-                    myCurve.Line2Color = mObj.Line2Color
-                    myCurve.Line2Width = mObj.Line2Width
-                    myCurve.Fill = mObj.Fill
-                    myCurve.FillColor = mObj.FillColor
-                    myCurve.LineStyle = mObj.LineStyle
-                    gObj = myCurve
-                Else
-                    Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
-                    myCurve.Rotation = 0
-                    myCurve.LineColor = mObj.LineColor
-                    myCurve.LineWidth = mObj.LineWidth
-                    myCurve.Line2Color = mObj.Line2Color
-                    myCurve.Line2Width = mObj.Line2Width
-                    myCurve.Fill = mObj.Fill
-                    myCurve.FillColor = mObj.FillColor
-                    myCurve.LineStyle = mObj.LineStyle
-                    gObj = myCurve
-                End If
-        End Select
+    '        Case OBJECTTYPE.Polygon, OBJECTTYPE.ClosedCurve
+    '            Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
+    '            Dim mPath As GraphicsPath = mObj.GetPath()
+    '            mPath.Flatten(New Matrix, 0.5)
+    '            Dim pPts() As PointF = mPath.PathPoints
+    '            Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
+    '            myCurve.Rotation = 0
+    '            myCurve.LineColor = mObj.LineColor
+    '            myCurve.LineWidth = mObj.LineWidth
+    '            myCurve.Line2Color = mObj.Line2Color
+    '            myCurve.Line2Width = mObj.Line2Width
+    '            myCurve.Fill = mObj.Fill
+    '            myCurve.FillColor = mObj.FillColor
+    '            myCurve.LineStyle = mObj.LineStyle
+    '            gObj = myCurve
+    '        Case OBJECTTYPE.Ellipse, OBJECTTYPE.Cycle
+    '            Dim mObj As ShapeGraphic = CType(pObj, ShapeGraphic)
+    '            Dim mPath As GraphicsPath = mObj.GetPath()
+    '            mPath.Flatten(New Matrix, 0.5)
+    '            Dim pPts() As PointF = mPath.PathPoints
+    '            Dim j As Integer = pPts.GetUpperBound(0)
+    '            ReDim Preserve pPts(j - 1)
+    '            Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
+    '            myCurve.Rotation = 0
+    '            myCurve.LineColor = mObj.LineColor
+    '            myCurve.LineWidth = mObj.LineWidth
+    '            myCurve.Line2Color = mObj.Line2Color
+    '            myCurve.Line2Width = mObj.Line2Width
+    '            myCurve.Fill = mObj.Fill
+    '            myCurve.LineStyle = mObj.LineStyle
+    '            myCurve.FillColor = mObj.FillColor
+    '            gObj = myCurve
+    '        Case OBJECTTYPE.Pie
+    '            Dim mObj As PieGraphic = CType(pObj, PieGraphic)
+    '            Dim mPath As GraphicsPath = mObj.GetPath()
+    '            mPath.Flatten(New Matrix, 0.5)
+    '            Dim pPts() As PointF = mPath.PathPoints
+    '            If mObj.IsArc = True Then
+    '                Dim myCurve As New CurveGraphic(pPts, 1, Color.Red)
+    '                myCurve.Rotation = 0
+    '                myCurve.LineColor = mObj.LineColor
+    '                myCurve.LineWidth = mObj.LineWidth
+    '                myCurve.Line2Color = mObj.Line2Color
+    '                myCurve.Line2Width = mObj.Line2Width
+    '                myCurve.Fill = mObj.Fill
+    '                myCurve.FillColor = mObj.FillColor
+    '                myCurve.LineStyle = mObj.LineStyle
+    '                gObj = myCurve
+    '            Else
+    '                Dim myCurve As New ClosedCurveGraphic(pPts, 1, Color.Red)
+    '                myCurve.Rotation = 0
+    '                myCurve.LineColor = mObj.LineColor
+    '                myCurve.LineWidth = mObj.LineWidth
+    '                myCurve.Line2Color = mObj.Line2Color
+    '                myCurve.Line2Width = mObj.Line2Width
+    '                myCurve.Fill = mObj.Fill
+    '                myCurve.FillColor = mObj.FillColor
+    '                myCurve.LineStyle = mObj.LineStyle
+    '                gObj = myCurve
+    '            End If
+    '    End Select
 
-        If Not gObj Is Nothing Then
-            Dim gObj2 As NodesShapeGraphic = CType(gObj, NodesShapeGraphic)
-            For i As Integer = 0 To gObj2.Nodes.Count - 1
-                gObj2.Nodes.Item(i).IsControl = True
-            Next
-            Return gObj2
-        Else
-            Return pObj
-        End If
-    End Function
+    '    If Not gObj Is Nothing Then
+    '        Dim gObj2 As NodesShapeGraphic = CType(gObj, NodesShapeGraphic)
+    '        For i As Integer = 0 To gObj2.Nodes.Count - 1
+    '            gObj2.Nodes.Item(i).IsControl = True
+    '        Next
+    '        Return gObj2
+    '    Else
+    '        Return pObj
+    '    End If
+    'End Function
 
     Public Sub LoadDefa(ByVal pFileName As String)
         Try

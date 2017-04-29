@@ -13,7 +13,9 @@ Public Class frmMain
     Private myPixelsPerGridX As Double
     Private myPixelsPerGridY As Double
 
-    Private myDiaHinh As CTerrain
+    'Private myDiaHinh As CTerrain
+    Public myTerrain As CDiaHinh
+
     Private m_TexImage As Bitmap
 
     Private heightData(,) As Single
@@ -239,7 +241,8 @@ Public Class frmMain
         'Dim mPath As String = myCacKyHieuUDL.Substring(0, mIndex + 1)
         'Directory.SetCurrentDirectory(mPath)
 
-        myDefaFileName = My.Settings.myDefaFileName
+        '-- modBanDo --
+        'myDefaFileName = My.Settings.myDefaFileName
 
         LoadDefa(myDefaFileName)
 
@@ -1336,15 +1339,21 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub ChangeDHFocus(ByVal pLon As Double, ByVal pLat As Double)
-        If ((pLon > myMap1X) And (pLon < myMap2X)) _
-            And ((pLat < myMap1Y) And (pLat > myMap2Y)) Then
-            Dim mSurfPos As System.Drawing.PointF = GetSurfPosition(pLon, pLat)
-            myDiaHinh.ChangeFocus(mSurfPos.X / m_TexImage.Width, (m_TexImage.Height - mSurfPos.Y) / m_TexImage.Height)
-            m_LastMapCX = pLon 'Me.AxMap1.CenterX
-            m_LastMapCY = pLat 'Me.AxMap1.CenterY
-        End If
-    End Sub
+    '''' <summary>
+    '''' CDiaHinh.vb
+    '''' </summary>
+    '''' <param name="pLon"></param>
+    '''' <param name="pLat"></param>
+    '''' <remarks></remarks>
+    'Private Sub ChangeDHFocus(ByVal pLon As Double, ByVal pLat As Double)
+    '    If ((pLon > myMap1X) And (pLon < myMap2X)) _
+    '        And ((pLat < myMap1Y) And (pLat > myMap2Y)) Then
+    '        Dim mSurfPos As System.Drawing.PointF = GetSurfPosition(pLon, pLat)
+    '        myDiaHinh.ChangeFocus(mSurfPos.X / m_TexImage.Width, (m_TexImage.Height - mSurfPos.Y) / m_TexImage.Height)
+    '        m_LastMapCX = pLon 'Me.AxMap1.CenterX
+    '        m_LastMapCY = pLat 'Me.AxMap1.CenterY
+    '    End If
+    'End Sub
 
     Public Sub New()
 
@@ -1426,34 +1435,38 @@ Public Class frmMain
     'Private m_TexObjs As ArrayList
     'Private m_NotTexObjName = "Ký hiệu mới"
 
-    Private Sub InitTerrain()
-        LoadHeightData(myGridDataFile)
+    '''' <summary>
+    '''' Thay bằng hàm CDiaHinh.InitDiaHinh
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Private Sub InitTerrain()
+    '    LoadHeightData(myGridDataFile)
 
-        myDiaHinh = New CTerrain(Me.Panel3D, heightData, mySCALE_FACTOR)
+    '    myDiaHinh = New CTerrain(Me.Panel3D, heightData, mySCALE_FACTOR)
 
-        m_TexImage = New Bitmap(myTextureFile)
-        'myDiaHinh.LoadMemStream(m_TexImage)
-        myPixelsPerGridX = CDbl(m_TexImage.Width) / (myGRID_WIDTH - 1)
-        myPixelsPerGridY = CDbl(m_TexImage.Height) / (myGRID_HEIGHT - 1)
+    '    m_TexImage = New Bitmap(myTextureFile)
+    '    'myDiaHinh.LoadMemStream(m_TexImage)
+    '    myPixelsPerGridX = CDbl(m_TexImage.Width) / (myGRID_WIDTH - 1)
+    '    myPixelsPerGridY = CDbl(m_TexImage.Height) / (myGRID_HEIGHT - 1)
 
-        mySurf2X = m_TexImage.Width
-        mySurf2Y = m_TexImage.Height
+    '    mySurf2X = m_TexImage.Width
+    '    mySurf2Y = m_TexImage.Height
 
-        'm_OWidth = CDbl(m_TexImage.Width) / (m_Width)
-        'm_OHeight = CDbl(m_TexImage.Height) / (m_Height)
+    '    'm_OWidth = CDbl(m_TexImage.Width) / (m_Width)
+    '    'm_OHeight = CDbl(m_TexImage.Height) / (m_Height)
 
-        myDiaHinh.InitTerrain(m_TexImage, New Vector3(0, -44, -22), New Vector3(0, 0, 0), _
-        -Math.PI / 7, New Vector3(-15.0F, -15.0F, -20.0F), New Vector3(0.0F, 10.0F, 5.0F))
+    '    myDiaHinh.InitTerrain(m_TexImage, New Vector3(0, -44, -22), New Vector3(0, 0, 0), _
+    '    -Math.PI / 7, New Vector3(-15.0F, -15.0F, -20.0F), New Vector3(0.0F, 10.0F, 5.0F))
 
-        m_Symbol3Objs = New ArrayList
-        'm_TexObjs = New ArrayList
+    '    m_Symbol3Objs = New ArrayList
+    '    'm_TexObjs = New ArrayList
 
-        'AddHandler Me.MouseWheel, AddressOf Me.frmMain_MouseWheel
+    '    'AddHandler Me.MouseWheel, AddressOf Me.frmMain_MouseWheel
 
-        myDiaHinh.LoadModelMeshs("D3DModelMesh.xml")
+    '    myDiaHinh.LoadModelMeshs("D3DModelMesh.xml")
 
-        myDiaHinh.LoadBillboardMeshs("D3DBillboardMesh.xml")
-    End Sub
+    '    myDiaHinh.LoadBillboardMeshs("D3DBillboardMesh.xml")
+    'End Sub
 
     Private Sub HienKyHieu()
         LoadSymbols()
@@ -1490,47 +1503,52 @@ Public Class frmMain
         Return Kq
     End Function
 
-    Private Sub LoadSymbols()
-        Me.myDiaHinh.ClearModels()
-        Me.myDiaHinh.ClearBillboards()
-        m_Symbol3Objs.Clear()
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb
+    '''' </summary>
+    '''' <remarks></remarks>
+    'Private Sub LoadSymbols()
+    '    Me.myDiaHinh.ClearModels()
+    '    Me.myDiaHinh.ClearBillboards()
+    '    m_Symbol3Objs.Clear()
 
-        Dim m_OWidth As Double = CDbl(m_TexImage.Width * 1000D) / (myGRID_WIDTH - 1) / 1000
-        Dim m_OHeight As Double = CDbl(m_TexImage.Height * 1000D) / (myGRID_HEIGHT - 1) / 1000
+    '    Dim m_OWidth As Double = CDbl(m_TexImage.Width * 1000D) / (myGRID_WIDTH - 1) / 1000
+    '    Dim m_OHeight As Double = CDbl(m_TexImage.Height * 1000D) / (myGRID_HEIGHT - 1) / 1000
 
-        For Each aSB As CSymbol In myBando.drawingSymbols
-            Dim mSurfPos As System.Drawing.PointF = GetSurfPosition(aSB.GocX, aSB.GocY)
-            Dim mIndex As Integer
-            mIndex = myDiaHinh.GetModelMeshIndex(aSB.Description)
-            If mIndex > -1 Then
-                Dim mSX As Single = CDbl(mSurfPos.X) / m_OWidth
-                Dim mSY As Single = CDbl(myGRID_HEIGHT - 1) - CDbl(mSurfPos.Y) / m_OHeight
-                Dim mPos As Vector3 = New Vector3(mSX, mSY, -7)
-                myDiaHinh.Load1Model(aSB.Description, mIndex, mPos)
-            Else
-                mIndex = myDiaHinh.GetBillboardMeshIndex(aSB.Description)
-                If mIndex > -1 Then
-                    Dim mSX As Single = CDbl(mSurfPos.X) / m_OWidth
-                    Dim mSY As Single = CDbl(myGRID_HEIGHT - 1) - CDbl(mSurfPos.Y) / m_OHeight
-                    Dim mPos As Vector3 = New Vector3(mSX, mSY, -7)
-                    myDiaHinh.Load1Billboard(aSB.Description, mIndex, mPos)
-                Else
-                    Dim Scale As Single = (aSB.Zoom / aSB.MWidth) * (CDbl(my3DSoPixelsPer1000m) / 1000)
+    '    For Each aSB As CSymbol In myBando.drawingSymbols
+    '        Dim mSurfPos As System.Drawing.PointF = GetSurfPosition(aSB.GocX, aSB.GocY)
+    '        Dim mIndex As Integer
+    '        mIndex = myDiaHinh.GetModelMeshIndex(aSB.Description)
+    '        If mIndex > -1 Then
+    '            Dim mSX As Single = CDbl(mSurfPos.X) / m_OWidth
+    '            Dim mSY As Single = CDbl(myGRID_HEIGHT - 1) - CDbl(mSurfPos.Y) / m_OHeight
+    '            Dim mPos As Vector3 = New Vector3(mSX, mSY, -7)
+    '            myDiaHinh.Load1Model(aSB.Description, mIndex, mPos)
+    '        Else
+    '            mIndex = myDiaHinh.GetBillboardMeshIndex(aSB.Description)
+    '            If mIndex > -1 Then
+    '                Dim mSX As Single = CDbl(mSurfPos.X) / m_OWidth
+    '                Dim mSY As Single = CDbl(myGRID_HEIGHT - 1) - CDbl(mSurfPos.Y) / m_OHeight
+    '                Dim mPos As Vector3 = New Vector3(mSX, mSY, -7)
+    '                myDiaHinh.Load1Billboard(aSB.Description, mIndex, mPos)
+    '            Else
+    '                Dim Scale As Single = (aSB.Zoom / aSB.MWidth) * (CDbl(my3DSoPixelsPer1000m) / 1000)
 
-                    Dim mGObjs As New CGraphicObjs
-                    For Each aGObj As GraphicObject In aSB.GObjs
-                        Dim mGobj As GraphicObject = aGObj.Clone
-                        mGObjs.Add(mGobj)
-                    Next
-                    Dim mSymbolObj As New CSymbol3(aSB.Description, mSurfPos, mGObjs)
-                    mSymbolObj.Zoom = Scale
+    '                Dim mGObjs As New CGraphicObjs
+    '                For Each aGObj As GraphicObject In aSB.GObjs
+    '                    Dim mGobj As GraphicObject = aGObj.Clone
+    '                    mGObjs.Add(mGobj)
+    '                Next
+    '                Dim mSymbolObj As New CSymbol3(aSB.Description, mSurfPos, mGObjs)
+    '                mSymbolObj.Zoom = Scale
 
-                    m_Symbol3Objs.Add(mSymbolObj)
-                End If
-            End If
-        Next
+    '                m_Symbol3Objs.Add(mSymbolObj)
+    '            End If
+    '        End If
+    '    Next
 
-    End Sub
+    'End Sub
 
     Private Sub DrawSymbol(ByVal bmpImage As Image)
         Dim g As Graphics = Graphics.FromImage(bmpImage)
@@ -1542,165 +1560,202 @@ Public Class frmMain
         'bmpImage.Save("images\map.jpg")
     End Sub
 
-    Private Sub ExportModels(ByVal pFileName As String)
-        Dim sw As New StreamWriter(pFileName)
-        Dim wr As XmlTextWriter = New XmlTextWriter(sw)
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb
+    '''' </summary>
+    '''' <param name="pFileName"></param>
+    '''' <remarks></remarks>
+    'Private Sub ExportModels(ByVal pFileName As String)
+    '    Dim sw As New StreamWriter(pFileName)
+    '    Dim wr As XmlTextWriter = New XmlTextWriter(sw)
 
-        'Models2xml(wr)
-        Dim i As Integer = 0
-        Dim mName As String
-        Dim iMesh As Integer
+    '    'Models2xml(wr)
+    '    Dim i As Integer = 0
+    '    Dim mName As String
+    '    Dim iMesh As Integer
 
-        wr.WriteStartElement("Models")
+    '    wr.WriteStartElement("Models")
 
-        For Each aModel As CModel In myDiaHinh.Models
-            i += 1
-            mName = aModel.Name  'aModel.ModelMesh.myName 
-            iMesh = myDiaHinh.ModelMeshs.IndexOf(aModel.ModelMesh)
-            wr.WriteStartElement("Model")
-            wr.WriteAttributeString("Name", mName)
-            wr.WriteAttributeString("iMesh", iMesh.ToString)
-            wr.WriteAttributeString("X", aModel.X.ToString)
-            wr.WriteAttributeString("Y", aModel.Y.ToString)
-            wr.WriteAttributeString("Z", aModel.Z.ToString)
-            'wr.WriteElementString("ID", mSlide.ID.ToString)
-            wr.WriteEndElement()
-        Next
-        wr.WriteEndElement()
+    '    For Each aModel As CModel In myDiaHinh.Models
+    '        i += 1
+    '        mName = aModel.Name  'aModel.ModelMesh.myName 
+    '        iMesh = myDiaHinh.ModelMeshs.IndexOf(aModel.ModelMesh)
+    '        wr.WriteStartElement("Model")
+    '        wr.WriteAttributeString("Name", mName)
+    '        wr.WriteAttributeString("iMesh", iMesh.ToString)
+    '        wr.WriteAttributeString("X", aModel.X.ToString)
+    '        wr.WriteAttributeString("Y", aModel.Y.ToString)
+    '        wr.WriteAttributeString("Z", aModel.Z.ToString)
+    '        'wr.WriteElementString("ID", mSlide.ID.ToString)
+    '        wr.WriteEndElement()
+    '    Next
+    '    wr.WriteEndElement()
 
-        wr.Close()
+    '    wr.Close()
 
-        'MsgBox("Export Models xong.")
+    '    'MsgBox("Export Models xong.")
 
-    End Sub
+    'End Sub
 
-    Private Sub ExportBillboards(ByVal pFileName As String)
-        Dim sw As New StreamWriter(pFileName)
-        Dim wr As XmlTextWriter = New XmlTextWriter(sw)
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb
+    '''' </summary>
+    '''' <param name="pFileName"></param>
+    '''' <remarks></remarks>
+    'Private Sub ExportBillboards(ByVal pFileName As String)
+    '    Dim sw As New StreamWriter(pFileName)
+    '    Dim wr As XmlTextWriter = New XmlTextWriter(sw)
 
-        'Billboards2xml(wr)
-        Dim i As Integer = 0
-        Dim mName As String
-        Dim iMesh As Integer
+    '    'Billboards2xml(wr)
+    '    Dim i As Integer = 0
+    '    Dim mName As String
+    '    Dim iMesh As Integer
 
-        wr.WriteStartElement("Billboards")
+    '    wr.WriteStartElement("Billboards")
 
-        For Each aBillboard As CBillboard In myDiaHinh.Billboards
-            i += 1
-            mName = aBillboard.Name  'aModel.ModelMesh.myName 
-            iMesh = myDiaHinh.BillboardMeshs.IndexOf(aBillboard.BillboardMesh)
-            wr.WriteStartElement("Billboard")
-            wr.WriteAttributeString("Name", mName)
-            wr.WriteAttributeString("iMesh", iMesh.ToString)
-            wr.WriteAttributeString("X", aBillboard.Position.X.ToString)
-            wr.WriteAttributeString("Y", aBillboard.Position.Y.ToString)
-            wr.WriteAttributeString("Z", aBillboard.Z.ToString)
-            'wr.WriteElementString("ID", mSlide.ID.ToString)
-            wr.WriteEndElement()
-        Next
-        wr.WriteEndElement()
+    '    For Each aBillboard As CBillboard In myDiaHinh.Billboards
+    '        i += 1
+    '        mName = aBillboard.Name  'aModel.ModelMesh.myName 
+    '        iMesh = myDiaHinh.BillboardMeshs.IndexOf(aBillboard.BillboardMesh)
+    '        wr.WriteStartElement("Billboard")
+    '        wr.WriteAttributeString("Name", mName)
+    '        wr.WriteAttributeString("iMesh", iMesh.ToString)
+    '        wr.WriteAttributeString("X", aBillboard.Position.X.ToString)
+    '        wr.WriteAttributeString("Y", aBillboard.Position.Y.ToString)
+    '        wr.WriteAttributeString("Z", aBillboard.Z.ToString)
+    '        'wr.WriteElementString("ID", mSlide.ID.ToString)
+    '        wr.WriteAttributeString("Heading", aBillboard.angleZ.ToString())
+    '        wr.WriteEndElement()
+    '    Next
+    '    wr.WriteEndElement()
 
-        wr.Close()
+    '    wr.Close()
 
-        'MsgBox("Export Billboards xong.")
+    '    'MsgBox("Export Billboards xong.")
 
-    End Sub
+    'End Sub
 
-    Private Function IsActiveSymbol(ByVal pName As String, ByVal pActions As List(Of CActionDef)) As Boolean
-        Dim kq As Boolean = False
-        If pName.Length > 0 Then
-            For Each aAction As CActionDef In pActions
-                If aAction.ObjName = pName Then
-                    kq = True
-                    Exit For
-                End If
-            Next
-        End If
-        Return kq
-    End Function
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb
+    '''' </summary>
+    '''' <param name="pName"></param>
+    '''' <param name="pActions"></param>
+    '''' <returns></returns>
+    '''' <remarks></remarks>
+    'Private Function IsActiveSymbol(ByVal pName As String, ByVal pActions As List(Of CActionDef)) As Boolean
+    '    Dim kq As Boolean = False
+    '    If pName.Length > 0 Then
+    '        For Each aAction As CActionDef In pActions
+    '            If aAction.ObjName = pName Then
+    '                kq = True
+    '                Exit For
+    '            End If
+    '        Next
+    '    End If
+    '    Return kq
+    'End Function
 
-    Private Sub ExportTexObjs(ByVal pFileName As String, ByVal pActions As List(Of CActionDef))
-        Dim i As Integer = 0
-        Dim mImageFile As String
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb 
+    '''' </summary>
+    '''' <param name="pFileName"></param>
+    '''' <param name="pActions"></param>
+    '''' <remarks></remarks>
+    'Private Sub ExportTexObjs(ByVal pFileName As String, ByVal pActions As List(Of CActionDef))
+    '    Dim i As Integer = 0
+    '    Dim mImageFile As String
 
-        Dim TexObjNames As Dictionary(Of String, String) = New Dictionary(Of String, String)
+    '    Dim TexObjNames As Dictionary(Of String, String) = New Dictionary(Of String, String)
 
-        Dim mTexImage As Bitmap = New Bitmap(myTextureFile)
-        Dim g As Graphics = Graphics.FromImage(mTexImage)
+    '    Dim mTexImage As Bitmap = New Bitmap(myTextureFile)
+    '    Dim g As Graphics = Graphics.FromImage(mTexImage)
 
-        Using sw As StreamWriter = New StreamWriter(pFileName)
-            sw.WriteLine("<TexObjs>")
-            For Each aSymbol As CSymbol3 In m_Symbol3Objs
-                If IsActiveSymbol(aSymbol.Name, pActions) Then
-                    'Try
-                    'TexObjNames.Add(aSymbol.Name, aSymbol.Name)
-                    i += 1
-                    mImageFile = mySaBanDir & "\TexObj" & i.ToString("000") & ".bmp"
-                    sw.WriteLine(GetTexObjStr(aSymbol, mImageFile))
-                    'Catch ex As Exception
-                    'End Try
-                Else
-                    aSymbol.Draw(g)
-                End If
-            Next
-            sw.WriteLine("</TexObjs>")
+    '    Using sw As StreamWriter = New StreamWriter(pFileName)
+    '        sw.WriteLine("<TexObjs>")
+    '        For Each aSymbol As CSymbol3 In m_Symbol3Objs
+    '            If IsActiveSymbol(aSymbol.Name, pActions) Then
+    '                'Try
+    '                'TexObjNames.Add(aSymbol.Name, aSymbol.Name)
+    '                i += 1
+    '                mImageFile = mySaBanDir & "\TexObj" & i.ToString("000") & ".bmp"
+    '                sw.WriteLine(GetTexObjStr(aSymbol, mImageFile))
+    '                'Catch ex As Exception
+    '                'End Try
+    '            Else
+    '                aSymbol.Draw(g)
+    '            End If
+    '        Next
+    '        sw.WriteLine("</TexObjs>")
 
-            sw.Close()
-        End Using
+    '        sw.Close()
+    '    End Using
 
-        mTexImage.Save(mySaBanDir & "\DienTapMap.jpg")
-        mTexImage.Dispose()
-    End Sub
+    '    mTexImage.Save(mySaBanDir & "\DienTapMap.jpg")
+    '    mTexImage.Dispose()
+    'End Sub
 
-    Private Function GetTexObjStr(ByVal aSymbol As CSymbol3, ByVal mImageFile As String) As String
-        Dim strKQ As String = "<TexObj"
-        Dim mName As String
-        Dim mWidth As Integer
-        Dim mHeight As Integer
-        Dim mShiftX As Integer
-        Dim mShiftY As Integer
+    '''' <summary>
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb 
+    '''' </summary>
+    '''' <param name="aSymbol"></param>
+    '''' <param name="mImageFile"></param>
+    '''' <returns></returns>
+    '''' <remarks></remarks>
+    'Private Function GetTexObjStr(ByVal aSymbol As CSymbol3, ByVal mImageFile As String) As String
+    '    Dim strKQ As String = "<TexObj"
+    '    Dim mName As String
+    '    Dim mWidth As Integer
+    '    Dim mHeight As Integer
+    '    Dim mShiftX As Integer
+    '    Dim mShiftY As Integer
 
-        Dim rect As Rectangle
-        Dim mMinX As Integer
-        Dim mMinY As Integer
-        Dim mMaxX As Integer
-        Dim mMaxY As Integer
+    '    Dim rect As Rectangle
+    '    Dim mMinX As Integer
+    '    Dim mMinY As Integer
+    '    Dim mMaxX As Integer
+    '    Dim mMaxY As Integer
 
-        rect = aSymbol.GetBounds()
-        mMinX = Math.Floor(CDbl(rect.X) / myPixelsPerGridX)
-        mMinY = Math.Floor(CDbl(rect.Y) / myPixelsPerGridY)
-        mMaxX = Math.Ceiling(CDbl(rect.X + rect.Width) / myPixelsPerGridX)
-        mMaxY = Math.Ceiling(CDbl(rect.Y + rect.Height) / myPixelsPerGridY)
+    '    rect = aSymbol.GetBounds()
+    '    mMinX = Math.Floor(CDbl(rect.X) / myPixelsPerGridX)
+    '    mMinY = Math.Floor(CDbl(rect.Y) / myPixelsPerGridY)
+    '    mMaxX = Math.Ceiling(CDbl(rect.X + rect.Width) / myPixelsPerGridX)
+    '    mMaxY = Math.Ceiling(CDbl(rect.Y + rect.Height) / myPixelsPerGridY)
 
-        mName = aSymbol.Name
-        mWidth = mMaxX - mMinX
-        mHeight = mMaxY - mMinY
-        mShiftX = mMinX
-        mShiftY = myGRID_HEIGHT - 1 - mMaxY
+    '    mName = aSymbol.Name
+    '    mWidth = mMaxX - mMinX
+    '    mHeight = mMaxY - mMinY
+    '    mShiftX = mMinX
+    '    mShiftY = myGRID_HEIGHT - 1 - mMaxY
 
-        Dim mSymbolRect As Rectangle = New Rectangle(mMinX * myPixelsPerGridX, mMinY * myPixelsPerGridY, (mMaxX - mMinX) * myPixelsPerGridX, (mMaxY - mMinY) * myPixelsPerGridY)
-        Dim mSymbolImage As Bitmap = New Bitmap(mSymbolRect.Width, mSymbolRect.Height)
+    '    Dim mSymbolRect As Rectangle = New Rectangle(mMinX * myPixelsPerGridX, mMinY * myPixelsPerGridY, (mMaxX - mMinX) * myPixelsPerGridX, (mMaxY - mMinY) * myPixelsPerGridY)
+    '    Dim mSymbolImage As Bitmap = New Bitmap(mSymbolRect.Width, mSymbolRect.Height)
 
-        aSymbol.GocX -= mSymbolRect.X
-        aSymbol.GocY -= mSymbolRect.Y
-        Dim g As Graphics = Graphics.FromImage(mSymbolImage)
-        g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias '.HighQuality
-        g.Clear(Color.White)
-        aSymbol.Draw(g)
-        g.Dispose()
+    '    aSymbol.GocX -= mSymbolRect.X
+    '    aSymbol.GocY -= mSymbolRect.Y
+    '    Dim g As Graphics = Graphics.FromImage(mSymbolImage)
+    '    g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias '.HighQuality
+    '    g.Clear(Color.White)
+    '    aSymbol.Draw(g)
+    '    g.Dispose()
 
-        mSymbolImage.Save(mImageFile, Imaging.ImageFormat.Bmp)
+    '    mSymbolImage.Save(mImageFile, Imaging.ImageFormat.Bmp)
 
-        strKQ &= " Name=""" & mName & """"
-        strKQ &= " ImageFile=""" & mImageFile & """"
-        strKQ &= " Width=""" & mWidth & """"
-        strKQ &= " Height=""" & mHeight & """"
-        strKQ &= " ShiftX=""" & mShiftX & """"
-        strKQ &= " ShiftY=""" & mShiftY & """"
-
-        strKQ &= " />"
-        Return strKQ
-    End Function
+    '    strKQ &= " Name=""" & mName & """"
+    '    strKQ &= " ImageFile=""" & mImageFile & """"
+    '    strKQ &= " Width=""" & mWidth & """"
+    '    strKQ &= " Height=""" & mHeight & """"
+    '    strKQ &= " ShiftX=""" & mShiftX & """"
+    '    strKQ &= " ShiftY=""" & mShiftY & """"
+    '    strKQ &= " ImageWidth=""" + mSymbolRect.Width + """"
+    '    strKQ &= " ImageHeight=""" + mSymbolRect.Height + """"
+    '    strKQ &= " />"
+    '    Return strKQ
+    'End Function
 
     Private Sub Panel3D_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Panel3D.MouseClick
         Me.Panel3D.Select()
@@ -1733,45 +1788,47 @@ Public Class frmMain
         'myBando.StartBlinking()
     End Sub
 
-    ''' <summary>
-    ''' 2017-02-22
-    ''' CODEEDIT
-    ''' </summary>
-    ''' <param name="pActions"></param>
-    ''' <remarks></remarks>
-    Public Sub ExportCacDT(ByVal pActions As List(Of CActionDef))
-        '**********************************************************************
-        'Đoạn code lấy từ hàm ExportSounds của class dlgActions.vbb
-        Dim pFileName As String = mySaBanDir & "\D3DSounds.xml"
-        Dim SoundNames As Dictionary(Of String, String) = New Dictionary(Of String, String)
+    '''' <summary>
+    '''' 2017-02-22
+    '''' CODEEDIT
+    '''' '-- CDiaHinh.vb --
+    '''' Chuyển vào CDiaHinh.vb 
+    '''' </summary>
+    '''' <param name="pActions"></param>
+    '''' <remarks></remarks>
+    'Public Sub ExportCacDT(ByVal pActions As List(Of CActionDef))
+    '    '**********************************************************************
+    '    'Đoạn code lấy từ hàm ExportSounds của class dlgActions.vbb
+    '    Dim pFileName As String = mySaBanDir & "\D3DSounds.xml"
+    '    Dim SoundNames As Dictionary(Of String, String) = New Dictionary(Of String, String)
 
-        Dim mTexImage As Bitmap = New Bitmap(myTextureFile)
-        Dim g As Graphics = Graphics.FromImage(mTexImage)
+    '    Dim mTexImage As Bitmap = New Bitmap(myTextureFile)
+    '    Dim g As Graphics = Graphics.FromImage(mTexImage)
 
-        Using sw As StreamWriter = New StreamWriter(pFileName)
-            sw.WriteLine("<Sounds>")
-            For Each aAction As CActionDef In pActions
-                Try
-                    Dim mSoundName As String = aAction.SoundName
-                    If mSoundName.Length > 0 Then
-                        SoundNames.Add(mSoundName, "sounds\" & mSoundName)
-                        sw.WriteLine("<Sound File=""" & "sounds\" & mSoundName & """ />")
-                    End If
-                Catch ex As Exception
+    '    Using sw As StreamWriter = New StreamWriter(pFileName)
+    '        sw.WriteLine("<Sounds>")
+    '        For Each aAction As CActionDef In pActions
+    '            Try
+    '                Dim mSoundName As String = aAction.SoundName
+    '                If mSoundName.Length > 0 Then
+    '                    SoundNames.Add(mSoundName, "sounds\" & mSoundName)
+    '                    sw.WriteLine("<Sound File=""" & "sounds\" & mSoundName & """ />")
+    '                End If
+    '            Catch ex As Exception
 
-                End Try
-            Next
-            sw.WriteLine("</Sounds>")
+    '            End Try
+    '        Next
+    '        sw.WriteLine("</Sounds>")
 
-            sw.Close()
-        End Using
-        '**********************************************************************
+    '        sw.Close()
+    '    End Using
+    '    '**********************************************************************
 
-        LoadSymbols()
-        ExportModels(mySaBanDir & "\D3DModels.xml")
-        ExportBillboards(mySaBanDir & "\D3DBillboards.xml")
-        ExportTexObjs(mySaBanDir & "\D3DTexObjs.xml", pActions)
-    End Sub
+    '    LoadSymbols()
+    '    ExportModels(mySaBanDir & "\D3DModels.xml")
+    '    ExportBillboards(mySaBanDir & "\D3DBillboards.xml")
+    '    ExportTexObjs(mySaBanDir & "\D3DTexObjs.xml", pActions)
+    'End Sub
 
     ''' <summary>
     ''' 2017-02-22
@@ -1823,6 +1880,7 @@ Public Class frmMain
         myBando.OnGetTarget(ptxtKQ, pDoCao)
     End Sub
 
+#Region "New Functions"
     Private Sub LoadFilediahinhToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoadFilediahinhToolStripMenuItem.Click
         Dim myDiaHinhDef As String = modSaBan.myDiaHinhDef
         Dim text As String = modSaBan.myDiaHinhDef
@@ -1846,4 +1904,40 @@ Public Class frmMain
             End If
         End If
     End Sub
+
+    Public myTerrain As CDiaHinh
+    Private Function LoadPara2(ByVal pDefFile As String) As Boolean
+        Dim result As Boolean = False
+        If modSaBan.LoadPara(pDefFile) Then
+            Try
+                Me.ClearBanDo()
+                modSaBan.LoadDienTap(modSaBan.myLastSaBan)
+                Me.Init2DMap()
+                If Not Information.IsNothing(Me.myTerrain) Then
+                    Me.myTerrain.Dispose()
+                    Me.myTerrain = Nothing
+                End If
+                Me.myTerrain = New CDiaHinh(Me.AxMap1, Me, modSaBan.heightData, modBdTC.cDecSepa, modBdTC.cGrpSepa)
+                Me.myTerrain.InitDiaHinh(modSaBan.myCamPos)
+                result = True
+            Catch expr_74 As Exception
+                ProjectData.SetProjectError(expr_74)
+                ProjectData.ClearProjectError()
+            End Try
+        End If
+        Return result
+    End Function
+
+    Private Sub ClearBanDo()
+        Me.LuuThayDoi()
+        Try
+            Me.myPages.Clear()
+            Me.AxMap1.Layers.RemoveAll()
+        Catch expr_23 As Exception
+            ProjectData.SetProjectError(expr_23)
+            ProjectData.ClearProjectError()
+        End Try
+    End Sub
+#End Region
+
 End Class

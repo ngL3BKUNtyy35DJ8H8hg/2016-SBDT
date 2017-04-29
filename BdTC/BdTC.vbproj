@@ -59,6 +59,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\myDll\DBiGraphicObjs.dll</HintPath>
     </Reference>
+    <Reference Include="DienTapLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -94,7 +95,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CSymbol.vb" />
-    <Compile Include="CSymbol3.vb" />
     <Compile Include="CThumbNails.vb" />
     <Compile Include="Dlg3DShow.Designer.vb">
       <DependentUpon>Dlg3DShow.vb</DependentUpon>
@@ -215,8 +215,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="modBanDo.vb" />
-    <Compile Include="module\modSaBan.vb" />
-    <Compile Include="module\modBdTC.vb" />
+    <Compile Include="New Classes\CDiaHinh.vb" />
+    <Compile Include="New Classes\Temp\CSymbol.vb" />
+    <Compile Include="New Classes\modSaBan.vb" />
+    <Compile Include="New Classes\modBdTC.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -510,6 +512,10 @@
     <None Include="Resources\FillDown.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="New Classes\Class Diagrams\CDiaHinh.cd" />
+    <None Include="New Classes\Class Diagrams\CSymbol.cd" />
+    <None Include="New Classes\Class Diagrams\modBDTCvsmodBanDo.cd" />
+    <None Include="New Classes\Class Diagrams\modSaBanvs.cd" />
     <None Include="Resources\FillUp.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +526,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actions\" />
+    <Folder Include="XuLyKH\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

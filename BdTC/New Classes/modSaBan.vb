@@ -10,9 +10,10 @@ Imports System.Xml
 Imports BdTC.Actions
 
 
-Public Module modSaBan
+Module modSaBan
     Public MyMnuName As String = "MyMnu.xml"
 
+    '-- modSaBan --
     Public myHienDanhSach As Boolean = True
 
     Public fActions As dlgActions
@@ -69,7 +70,11 @@ Public Module modSaBan
     Public mySpriteTexsFile As String = "..\MeshDef\D3DSpriteTexs.xml"
 
     Public myLastSaBan As String = "ThucHanh3.last"
+
+    '-- modBanDo --
     Public mySaBanDir As String = "ThucHanh3"
+
+    '-- modBanDo --
     Public LastBdTC As String = "ThucHanh3\ThucHanhCD.BDTC"
 
     '-- modBanDo --
@@ -106,7 +111,7 @@ Public Module modSaBan
     Public mySurf2X As Double = 2047D
     Public mySurf2Y As Double = 2405D
 
-    Public my3DSoPixelsPer1000m As Double = 312.0
+    Public my3DSoPixelsPer1000m As Double = 312
 
     Public Const RadsToDegs As Double = 57.29578
 
@@ -128,10 +133,11 @@ Public Module modSaBan
         Return result
     End Function
 
+    '-- modBanDo --
     Public Function GetSurfPosition(ByVal pMapX As Double, ByVal pMapY As Double) As PointF
         Dim result As PointF = New PointF(0.0F, 0.0F)
         Dim num As Double
-        If Operators.CompareString(modSaBan.myGridDataType, "xyz", False) = 0 Then
+        If modSaBan.myGridDataType = "xyz" Then
             num = (pMapX - modSaBan.myMap2X) * (modSaBan.mySurf2X - modSaBan.mySurf1X) / (modSaBan.myMap1X - modSaBan.myMap2X)
         Else
             num = (modSaBan.myMap1X - pMapX) * (modSaBan.mySurf2X - modSaBan.mySurf1X) / (modSaBan.myMap1X - modSaBan.myMap2X) + modSaBan.mySurf1X

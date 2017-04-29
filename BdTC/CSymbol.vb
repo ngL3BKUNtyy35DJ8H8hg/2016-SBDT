@@ -66,7 +66,8 @@ Public Class CSymbol
     Private m_GObjs As CGraphicObjs
     Private m_Description As String
     Private m_Blinking As Boolean
-    Public Xfile As String = ""
+
+    Public Heading As Single
 
     Property Blinking() As Boolean
         Get
@@ -764,7 +765,9 @@ Public Class CSymbol
     End Sub
 
     Protected Sub New()
+        Me.Heading = 0.0F
     End Sub
+
 
     Public Sub New(ByVal pMap As AxMapXLib.AxMap, ByVal pGObjs As CGraphicObjs)
         Me.New()
@@ -852,7 +855,7 @@ Public Class CSymbol
         m_Blinking = False
     End Sub
 
-    Public Sub New(ByVal pDesc As String, ByVal pBlinking As Boolean, ByVal pZoom As Double, ByVal pMWidth As Single, ByVal pGocX As Double, ByVal pGocY As Double, ByVal pGObjs As CGraphicObjs)
+    Public Sub New(ByVal pDesc As String, ByVal pBlinking As Boolean, ByVal pZoom As Double, ByVal pMWidth As Single, ByVal pGocX As Double, ByVal pGocY As Double, ByVal pGObjs As CGraphicObjs, ByVal pHeading As Single)
         Me.New()
         m_GocX = pGocX
         m_GocY = pGocY
@@ -865,6 +868,7 @@ Public Class CSymbol
         Next
         m_Description = pDesc
         m_Blinking = pBlinking
+        Me.Heading = pHeading
     End Sub
 End Class
 

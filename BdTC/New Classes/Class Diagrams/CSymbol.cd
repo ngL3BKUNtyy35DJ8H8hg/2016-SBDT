@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="BdTC.SaBan.CSymbol">
+    <Position X="9" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>New Classes\Temp\CSymbol.vb</FileName>
+      <HashCode>UAAAAAA0AIjjRggGEAIEAAAoFAgABAAAFBCBgCBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BdTC.CFOUNDNODE" Collapsed="true">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>CSymbol.vb</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAQAAAAgAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BdTC.CFOUNDOBJECT" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>CSymbol.vb</FileName>
+      <HashCode>QAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BdTC.CSymbol">
+    <Position X="6" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>CSymbol.vb</FileName>
+      <HashCode>UAAAAAA0AIjjRggGEAIEAACoFAgABAAAFBCBgCBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BdTC.CSymbols">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>CSymbol.vb</FileName>
+      <HashCode>AEIAAAAAAAiAAAAAgACABAKkAAAAAAgIAQAAAIQQAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

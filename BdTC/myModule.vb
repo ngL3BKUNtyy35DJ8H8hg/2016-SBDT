@@ -28,7 +28,10 @@ Module myModule
     'Public myMap3DWOR As String = "Map3D.WOR"
     'Public myDoCaoCamera As String = "3000" 'Double = 3000
     'Public myXoayStep As Integer = 5
-    Public myHienDanhSach As Boolean = True
+
+    '-- modBDTC --
+    'Public myHienDanhSach As Boolean = True
+
     Public myCoordSysType As Integer = 1
 
     Friend fBanDoNho As dlgBanDoNho
