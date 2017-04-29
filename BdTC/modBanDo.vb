@@ -8,20 +8,23 @@ Imports System.Xml
 Imports DBiGraphicObjs.DBiGraphicObjects
 
 Module modBanDo
-    Public cDecSepa As Char = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
-    Public cGrpSepa As Char = Application.CurrentCulture.NumberFormat.NumberGroupSeparator
+    '-- modBanDo --
+    'Public cDecSepa As Char = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+    'Public cGrpSepa As Char = Application.CurrentCulture.NumberFormat.NumberGroupSeparator
 
-    Public Structure UNDOITEM
-        Dim UndoSymbols As CSymbols
-        Dim MapX As Double
-        Dim MapY As Double
-        Dim SeleSymbol As CSymbol
-    End Structure
+    '-- modBanDo --
+    'Public Structure UNDOITEM
+    '    Dim UndoSymbols As CSymbols
+    '    Dim MapX As Double
+    '    Dim MapY As Double
+    '    Dim SeleSymbol As CSymbol
+    'End Structure
 
-    Public Structure INTERSECTNODE
-        Dim PT As PointF
-        Dim NodeIndex As Integer
-    End Structure
+    '-- modBanDo --
+    'Public Structure INTERSECTNODE
+    '    Dim PT As PointF
+    '    Dim NodeIndex As Integer
+    'End Structure
 
     Public Structure EDITNODE
         Dim r As Rectangle
@@ -49,17 +52,21 @@ Module modBanDo
     'Public myFirstZoomLevel As Double = 5000
     'Public myFirstMapWidth As Single = 600
 
-    Public myTinhChinhGocQuay As Double = 0.5
+    '-- modBDTC --
+    'Public myTinhChinhGocQuay As Double = 0.5
 
-    Public fCacKyHieu As dlgCacKyHieu
-    'Public fSearchKyHieu As frmSearchKyHieu
+    '-- modSaBan --
+    'Public fCacKyHieu As dlgCacKyHieu
 
-    'Public fTerrain As dlgTerrain
-    Public myTextureFile As String = "LongThanh.jpg"
-    Public myGridDataFile As String = "GridData.txt"
-    Public myGRID_WIDTH As Integer = 101 '79
-    Public myGRID_HEIGHT As Integer = 119 '88
-    Public mySCALE_FACTOR As Single = 2 '20
+    '-- modSaBan --
+    'Public myTextureFile As String = "LongThanh.jpg"
+    'Public myGridDataFile As String = "GridData.txt"
+
+    '-- modSaBan --
+    'Public myGRID_WIDTH As Integer = 101 '79
+    'Public myGRID_HEIGHT As Integer = 119 '88
+    'Public mySCALE_FACTOR As Single = 2 '20
+
     Public myFlag3DsFile As String = "Flag3Ds.xml"
     Public myResourcePath As String
     'Public myEffectFile As String
@@ -67,9 +74,10 @@ Module modBanDo
     Public mySaBanDefFileName As String = "LastSaBan.def"
 
     Public myCacKyHieuUDL As String = "KHData.udl"
-    Public myLoaiKH_ID As Long = 0
+    'Public myLoaiKH_ID As Long = 0
 
-    Public MyOtherLineStyle As COtherLineStyle
+    '-- modBDTC --
+    'Public MyOtherLineStyle As COtherLineStyle
 
     Public BDTyLeBanDo As Integer = 100000
 
@@ -77,102 +85,114 @@ Module modBanDo
     Public BDViDo As Double = 17.0
     Public BDZoomLevel As Double = 4000
 
-    Public DanhDauColor As Color = Color.FromArgb(75, Color.Red)
-    Public DanhDauColor2 As Color = Color.FromArgb(75, Color.Black)
-    Public VeBoundColor As Color = Color.FromKnownColor(KnownColor.HotTrack)
+    '-- modBDTC --
+    'Public DanhDauColor As Color = Color.FromArgb(75, Color.Red)
+    'Public DanhDauColor2 As Color = Color.FromArgb(75, Color.Black)
+    'Public VeBoundColor As Color = Color.FromKnownColor(KnownColor.HotTrack)
 
-
-    Public defaUndosNo As Integer = 10
-    Public stackUnDos() As UNDOITEM
-    Public stackReDos() As UNDOITEM
+    '-- modBDTC --
+    'Public defaUndosNo As Integer = 10
+    'Public stackUnDos() As UNDOITEM
+    'Public stackReDos() As UNDOITEM
 
     Public MaxStyle As Integer = 8
     Public ADStyles() As Integer
 
-    Public defaMyLineStyle As Integer = 0
+    '-- modBDTC --
+    'Public defaMyLineStyle As Integer = 0
+    'Public QuanDoColor As Color = Color.Red
+    'Public QuanXanhColor As Color = Color.Blue
+    'Public myColor(31) As Color
 
-    Public QuanDoColor As Color = Color.Red
-    Public QuanXanhColor As Color = Color.Blue
-    Public myColor(31) As Color
+    '-- modBDTC --
+    'Public defaGenPen1W As Integer = 1
+    'Public defaGenPen1C As Color = Color.Red
+    'Public defaGenPen2W As Integer = 0
+    'Public defaGenPen2C As Color = Color.Yellow
+    'Public defaGenFill As Boolean = False
+    'Public defaGenFillC As Color = Color.Red
+    'Public defaGenLineStyle As Integer = 0
 
-    Public defaGenPen1W As Integer = 1
-    Public defaGenPen1C As Color = Color.Red
-    Public defaGenPen2W As Integer = 0
-    Public defaGenPen2C As Color = Color.Yellow
-    Public defaGenFill As Boolean = False
-    Public defaGenFillC As Color = Color.Red
-    Public defaGenLineStyle As Integer = 0
+    '-- modBDTC --
+    'Public defaSongSongSize As Integer = 6
+    'Public defaSongSongLinesNo As Integer = 2
+    'Public defaSongSongPen1W As Integer = 1
+    'Public defaSongSongPen1C As Color = Color.Red
+    'Public defaSongSongPen2W As Integer = 0
+    'Public defaSongSongPen2C As Color = Color.Yellow
+    'Public defaSongSongLineStyle As Integer = 0
 
-    Public defaSongSongSize As Integer = 6
-    Public defaSongSongLinesNo As Integer = 2
-    Public defaSongSongPen1W As Integer = 1
-    Public defaSongSongPen1C As Color = Color.Red
-    Public defaSongSongPen2W As Integer = 0
-    Public defaSongSongPen2C As Color = Color.Yellow
-    Public defaSongSongLineStyle As Integer = 0
+    '-- modBDTC --
+    'Public myMuiTenDoRong As Single = 30
+    'Public defaMuiTenDoRong As Single = 30
+    'Public defaMuiTenPen1W As Integer = 1
+    'Public defaMuiTenPen1C As Color = Color.Red
+    'Public defaMuiTenPen2W As Integer = 0
+    'Public defaMuiTenPen2C As Color = Color.Yellow
+    'Public defaMuiTenFill As Boolean = True
+    'Public defaMuiTenFillC As Color = Color.FromArgb(100, Color.Red) 'Color.Red
 
-    Public myMuiTenDoRong As Single = 30
-    Public defaMuiTenDoRong As Single = 30
-    Public defaMuiTenPen1W As Integer = 1
-    Public defaMuiTenPen1C As Color = Color.Red
-    Public defaMuiTenPen2W As Integer = 0
-    Public defaMuiTenPen2C As Color = Color.Yellow
-    Public defaMuiTenFill As Boolean = True
-    Public defaMuiTenFillC As Color = Color.FromArgb(100, Color.Red) 'Color.Red
+    '-- modBDTC --
+    'Public defaMuiTenDacDoRong As Single = 6
+    'Public defaMuiTenDacPen1W As Integer = 1
+    'Public defaMuiTenDacPen1C As Color = Color.Red
+    'Public defaMuiTenDacPen2W As Integer = 0
+    'Public defaMuiTenDacPen2C As Color = Color.Yellow
+    'Public defaMuiTenDacFill As Boolean = True
+    'Public defaMuiTenDacFillC As Color = Color.FromArgb(255, Color.Red)
+    'Public defaMuiTenDacDoDai As Single = 100
 
-    Public defaMuiTenDacDoRong As Single = 6
-    Public defaMuiTenDacPen1W As Integer = 1
-    Public defaMuiTenDacPen1C As Color = Color.Red
-    Public defaMuiTenDacPen2W As Integer = 0
-    Public defaMuiTenDacPen2C As Color = Color.Yellow
-    Public defaMuiTenDacFill As Boolean = True
-    Public defaMuiTenDacFillC As Color = Color.FromArgb(255, Color.Red)
-    Public defaMuiTenDacDoDai As Single = 100
+    '-- modBDTC --
+    'Public defaPiePen1W As Integer = 1
+    'Public defaPiePen1C As Color = Color.Red
+    'Public defaPiePen2W As Integer = 0
+    'Public defaPiePen2C As Color = Color.Yellow
+    'Public defaPieFill As Boolean = True
+    'Public defaPieFillC As Color = Color.FromArgb(100, Color.Red) 'Color.Red
+    'Public defaPieArc As Boolean = False
+    'Public defaPieStartA As Integer = 0
+    'Public defaPieSweepA As Integer = 90
 
-    Public defaPiePen1W As Integer = 1
-    Public defaPiePen1C As Color = Color.Red
-    Public defaPiePen2W As Integer = 0
-    Public defaPiePen2C As Color = Color.Yellow
-    Public defaPieFill As Boolean = True
-    Public defaPieFillC As Color = Color.FromArgb(100, Color.Red) 'Color.Red
-    Public defaPieArc As Boolean = False
-    Public defaPieStartA As Integer = 0
-    Public defaPieSweepA As Integer = 90
+    '-- modBDTC --
+    'Public defaTableColsNo As Integer = 2
+    'Public defaTableRowsNo As Integer = 8
+    'Public defaTableBorderW As Integer = 1
+    'Public defaTableBorderC As Color = Color.Blue
+    'Public defaTableLineW As Integer = 1
+    'Public defaTableLineC As Color = Color.Gray
+    'Public defaTableFillC As Color = Color.FromArgb(100, Color.LightYellow)
 
-    Public defaTableColsNo As Integer = 2
-    Public defaTableRowsNo As Integer = 8
-    Public defaTableBorderW As Integer = 1
-    Public defaTableBorderC As Color = Color.Blue
-    Public defaTableLineW As Integer = 1
-    Public defaTableLineC As Color = Color.Gray
-    Public defaTableFillC As Color = Color.FromArgb(100, Color.LightYellow)
+    '-- modBDTC --
+    'Public defaTableTFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
+    'Public defaTableTFontName As String = "Tahoma"
+    'Public defaTableTFontSize As Single = 10
+    'Public defaTableTFontStyle As Integer = 0
+    'Public defaTableTextC As Color = Color.Black
 
-    Public defaTableTFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
-    Public defaTableTFontName As String = "Tahoma"
-    Public defaTableTFontSize As Single = 10
-    Public defaTableTFontStyle As Integer = 0
-    Public defaTableTextC As Color = Color.Black
+    '-- modBDTC --
+    'Public defaTextFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
+    'Public defaTextFontName As String = "Tahoma"
+    'Public defaTextFontSize As Single = 10
+    'Public defaTextFontStyle As Single = 0
+    'Public defaTextC As Color = Color.Red
 
-    Public defaTextFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
-    Public defaTextFontName As String = "Tahoma"
-    Public defaTextFontSize As Single = 10
-    Public defaTextFontStyle As Single = 0
-    Public defaTextC As Color = Color.Red
+    '-- modBDTC --
+    'Public defaImageWidth As Integer = 80 '40
+    'Public defaImageHeight As Integer = 40
+    'Public defaHorizontalSpacing As Integer = 10
+    'Public defaVerticalSpacing As Integer = 32 '16
 
-    Public defaImageWidth As Integer = 80 '40
-    Public defaImageHeight As Integer = 40
-    Public defaHorizontalSpacing As Integer = 10
-    Public defaVerticalSpacing As Integer = 32 '16
+    '-- modSaBan --
+    'Public myMap1X As Double = 106.941953898199D
+    'Public myMap1Y As Double = 10.844428647015D
+    'Public myMap2X As Double = 107.00178D
+    'Public myMap2Y As Double = 10.77494D
 
-    Public myMap1X As Double = 106.941953898199D
-    Public myMap1Y As Double = 10.844428647015D
-    Public mySurf1X As Double = 0D
-    Public mySurf1Y As Double = 0D
-
-    Public myMap2X As Double = 107.00178D
-    Public myMap2Y As Double = 10.77494D
-    Public mySurf2X As Double = 2047D
-    Public mySurf2Y As Double = 2405D
+    '-- modSaBan --
+    'Public mySurf1X As Double = 0D
+    'Public mySurf1Y As Double = 0D
+    'Public mySurf2X As Double = 2047D
+    'Public mySurf2Y As Double = 2405D
 
     Public my3DSoPixelsPer1000m As Integer = 312
 

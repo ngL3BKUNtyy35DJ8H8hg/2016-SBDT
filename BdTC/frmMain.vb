@@ -1822,4 +1822,28 @@ Public Class frmMain
     Public Sub OnGetTarget(ByVal ptxtKQ As TextBox, ByVal pDoCao As Single)
         myBando.OnGetTarget(ptxtKQ, pDoCao)
     End Sub
+
+    Private Sub LoadFilediahinhToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoadFilediahinhToolStripMenuItem.Click
+        Dim myDiaHinhDef As String = modSaBan.myDiaHinhDef
+        Dim text As String = modSaBan.myDiaHinhDef
+        Dim openFileDialog As OpenFileDialog = New OpenFileDialog()
+        openFileDialog.FileName = text
+        openFileDialog.Filter = "Dia hinh def file (*.diahinh)|*.diahinh|All files (*.*)|*.*"
+        openFileDialog.FilterIndex = 1
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            text = openFileDialog.FileName
+            If text.Length > 0 Then
+                Me.bLoaded = Me.LoadPara2(text)
+                If Not Me.bLoaded Then
+                    modSaBan.myDiaHinhDef = myDiaHinhDef
+                    If File.Exists(modSaBan.myDiaHinhDef) Then
+                        Me.bLoaded = Me.LoadPara2(modSaBan.myDiaHinhDef)
+                    End If
+                    If Not Me.bLoaded Then
+                        ProjectData.EndApp()
+                    End If
+                End If
+            End If
+        End If
+    End Sub
 End Class

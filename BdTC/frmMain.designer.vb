@@ -121,6 +121,7 @@ Partial Class frmMain
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip
         Me.HideSymbolToolStripButton = New System.Windows.Forms.ToolStripButton
         Me.DrawSymbolToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.LoadFilediahinhToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -147,7 +148,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ToolStripSeparator7, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem2, Me.AddPagesFromToolStripMenuItem, Me.ToolStripSeparator9, Me.SaveToolStripMenuItem, Me.ToolStripMenuItem1, Me.SaveAsToolStripMenuItem, Me.ToolStripMenuItem6, Me.ExitToolStripMenuItem, Me.ToolStripSeparator2, Me.PhanLoaiKyHieuToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ToolStripSeparator7, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem2, Me.AddPagesFromToolStripMenuItem, Me.ToolStripSeparator9, Me.SaveToolStripMenuItem, Me.ToolStripMenuItem1, Me.SaveAsToolStripMenuItem, Me.ToolStripMenuItem6, Me.ExitToolStripMenuItem, Me.ToolStripSeparator2, Me.PhanLoaiKyHieuToolStripMenuItem, Me.LoadFilediahinhToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.FileToolStripMenuItem.Text = "Tệp"
@@ -877,6 +878,12 @@ Partial Class frmMain
         Me.DrawSymbolToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.DrawSymbolToolStripButton.Text = "Hiện ký hiệu"
         '
+        'LoadFilediahinhToolStripMenuItem
+        '
+        Me.LoadFilediahinhToolStripMenuItem.Name = "LoadFilediahinhToolStripMenuItem"
+        Me.LoadFilediahinhToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
+        Me.LoadFilediahinhToolStripMenuItem.Text = "Load file .diahinh"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1012,5 +1019,6 @@ Partial Class frmMain
     Friend WithEvents DemoDienTapToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MoTaDienBienToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents XemToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoadFilediahinhToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
