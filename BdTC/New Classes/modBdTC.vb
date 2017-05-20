@@ -25,9 +25,9 @@ Module modBdTC
 
     Public fCacKyHieu As dlgCacKyHieu
 
-    Public fDefBDTC As dlgDefBdTC
+    'Public fDefBDTC As dlgDefBdTC
 
-    Public fChonTyleKH As dlgChonTyLeKH
+    'Public fChonTyleKH As dlgChonTyLeKH
 
     Public BDTyLeLayKH As Integer = 100
     '-- modBanDo --
@@ -141,230 +141,230 @@ Module modBdTC
 
     Public Function GetDouble(ByVal str1 As String) As Double
         Dim value As String = str1.Replace(modBdTC.cGrpSepa, modBdTC.cDecSepa)
-        Return Conversions.ToDouble(value)
+        Return Double.Parse(value)
     End Function
 
     Public Function GetSingle(ByVal str1 As String) As Single
         Dim value As String = str1.Replace(modBdTC.cGrpSepa, modBdTC.cDecSepa)
-        Return Conversions.ToSingle(value)
+        Return Single.Parse(value)
     End Function
 
-    'Public Sub LoadDefa(ByVal pFileName As String)
-    '    Try
-    '        Dim xmlTextReader As XmlTextReader = New XmlTextReader(pFileName)
-    '        modBdTC.XML2Defa(xmlTextReader)
-    '        xmlTextReader.Close()
-    '        modBdTC.defaTableTFont = New Font(modBdTC.defaTableTFontName, modBdTC.defaTableTFontSize, CType(modBdTC.defaTableTFontStyle, FontStyle), GraphicsUnit.Point)
-    '        ' The following expression was wrapped in a checked-expression
-    '        modBdTC.defaTextFont = New Font(modBdTC.defaTextFontName, modBdTC.defaTextFontSize, CType(Math.Round(CDec(modBdTC.defaTextFontStyle)), FontStyle), GraphicsUnit.Point)
-    '    Catch expr_50 As Exception
-    '        ProjectData.SetProjectError(expr_50)
-    '        ProjectData.ClearProjectError()
-    '    End Try
-    'End Sub
+    Public Sub LoadDefa(ByVal pFileName As String)
+        Try
+            Dim xmlTextReader As XmlTextReader = New XmlTextReader(pFileName)
+            modBdTC.XML2Defa(xmlTextReader)
+            xmlTextReader.Close()
+            modBdTC.defaTableTFont = New Font(modBdTC.defaTableTFontName, modBdTC.defaTableTFontSize, CType(modBdTC.defaTableTFontStyle, FontStyle), GraphicsUnit.Point)
+            ' The following expression was wrapped in a checked-expression
+            modBdTC.defaTextFont = New Font(modBdTC.defaTextFontName, modBdTC.defaTextFontSize, CType(Math.Round(CDec(modBdTC.defaTextFontStyle)), FontStyle), GraphicsUnit.Point)
+        Catch expr_50 As Exception
+            'ProjectData.SetProjectError(expr_50)
+            'ProjectData.ClearProjectError()
+        End Try
+    End Sub
 
-    'Private Sub XML2Defa(ByVal rr As XmlTextReader)
-    '    ' The following expression was wrapped in a checked-statement
-    '    Try
-    '        While rr.Read()
-    '            Dim nodeType As XmlNodeType = rr.NodeType
-    '            Dim xmlNodeType As XmlNodeType = nodeType
-    '            If xmlNodeType = XmlNodeType.Element Then
-    '                Dim name As String = rr.Name
-    '                If Operators.CompareString(name, "DEFAS", False) = 0 AndAlso rr.AttributeCount > 0 Then
-    '                    While rr.MoveToNextAttribute()
-    '                        Dim name2 As String = rr.Name
-    '                        If Operators.CompareString(name2, "QuanDoColor", False) = 0 Then
-    '                            modBdTC.QuanDoColor = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "QuanXanhColor", False) = 0 Then
-    '                            modBdTC.QuanXanhColor = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaGenPen1W", False) = 0 Then
-    '                            modBdTC.defaGenPen1W = Conversions.ToInteger(Conversion.Int(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaGenPen1C", False) = 0 Then
-    '                            modBdTC.defaGenPen1C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaGenPen2W", False) = 0 Then
-    '                            modBdTC.defaGenPen2W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaGenPen2C", False) = 0 Then
-    '                            modBdTC.defaGenPen2C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaGenFill", False) = 0 Then
-    '                            modBdTC.defaGenFill = Conversions.ToBoolean(Interaction.IIf(Operators.CompareString(rr.Value, "True", False) = 0, True, False))
-    '                        ElseIf Operators.CompareString(name2, "defaGenFillC", False) = 0 Then
-    '                            modBdTC.defaGenFillC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaGenLineStyle", False) = 0 Then
-    '                            modBdTC.defaGenLineStyle = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongSize", False) = 0 Then
-    '                            modBdTC.defaSongSongSize = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongLinesNo", False) = 0 Then
-    '                            modBdTC.defaSongSongLinesNo = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongPen1W", False) = 0 Then
-    '                            modBdTC.defaSongSongPen1W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongPen1C", False) = 0 Then
-    '                            modBdTC.defaSongSongPen1C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongPen2W", False) = 0 Then
-    '                            modBdTC.defaSongSongPen2W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongPen2C", False) = 0 Then
-    '                            modBdTC.defaSongSongPen2C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaSongSongLineStyle", False) = 0 Then
-    '                            modBdTC.defaSongSongLineStyle = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDoRong", False) = 0 Then
-    '                            modBdTC.defaMuiTenDoRong = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenPen1W", False) = 0 Then
-    '                            modBdTC.defaMuiTenPen1W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenPen1C", False) = 0 Then
-    '                            modBdTC.defaMuiTenPen1C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenPen2W", False) = 0 Then
-    '                            modBdTC.defaMuiTenPen2W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenPen2C", False) = 0 Then
-    '                            modBdTC.defaMuiTenPen2C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenFill", False) = 0 Then
-    '                            modBdTC.defaMuiTenFill = Conversions.ToBoolean(Interaction.IIf(Operators.CompareString(rr.Value, "True", False) = 0, True, False))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenFillC", False) = 0 Then
-    '                            modBdTC.defaMuiTenFillC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacDoDai", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacDoDai = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacDoRong", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacDoRong = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacPen1W", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacPen1W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacPen1C", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacPen1C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacPen2W", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacPen2W = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacPen2C", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacPen2C = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacFill", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacFill = Conversions.ToBoolean(Interaction.IIf(Operators.CompareString(rr.Value, "True", False) = 0, True, False))
-    '                        ElseIf Operators.CompareString(name2, "defaMuiTenDacFillC", False) = 0 Then
-    '                            modBdTC.defaMuiTenDacFillC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaTableColsNo", False) = 0 Then
-    '                            modBdTC.defaTableColsNo = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableRowsNo", False) = 0 Then
-    '                            modBdTC.defaTableRowsNo = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableBorderW", False) = 0 Then
-    '                            modBdTC.defaTableBorderW = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableBorderC", False) = 0 Then
-    '                            modBdTC.defaTableBorderC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaTableLineW", False) = 0 Then
-    '                            modBdTC.defaTableLineW = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableLineC", False) = 0 Then
-    '                            modBdTC.defaTableLineC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaTableFillC", False) = 0 Then
-    '                            modBdTC.defaTableFillC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaTableTFontName", False) = 0 Then
-    '                            modBdTC.defaTableTFontName = rr.Value
-    '                        ElseIf Operators.CompareString(name2, "defaTableTFontSize", False) = 0 Then
-    '                            modBdTC.defaTableTFontSize = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableTFontStyle", False) = 0 Then
-    '                            modBdTC.defaTableTFontStyle = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTableTextC", False) = 0 Then
-    '                            modBdTC.defaTableTextC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "defaTextFontName", False) = 0 Then
-    '                            modBdTC.defaTextFontName = rr.Value
-    '                        ElseIf Operators.CompareString(name2, "defaTextFontSize", False) = 0 Then
-    '                            modBdTC.defaTextFontSize = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTextFontStyle", False) = 0 Then
-    '                            modBdTC.defaTextFontStyle = Conversions.ToSingle(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "defaTextC", False) = 0 Then
-    '                            modBdTC.defaTextC = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "DanhDauColor", False) = 0 Then
-    '                            modBdTC.DanhDauColor = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "DanhDauColor2", False) = 0 Then
-    '                            modBdTC.DanhDauColor2 = Color.FromArgb(Conversions.ToInteger(rr.Value))
-    '                        ElseIf Operators.CompareString(name2, "VeBoundColor", False) = 0 Then
-    '                            modBdTC.VeBoundColor = Color.FromKnownColor(CType(Conversions.ToInteger(rr.Value), KnownColor))
-    '                        ElseIf Operators.CompareString(name2, "defaUndosNo", False) = 0 Then
-    '                            modBdTC.defaUndosNo = Conversions.ToInteger(rr.Value)
-    '                        ElseIf Operators.CompareString(name2, "ColorsTable", False) = 0 Then
-    '                            Dim value As String = rr.Value
-    '                            Dim array As String() = value.Split(New Char() {" "c})
-    '                            If array.GetUpperBound(0) = 31 Then
-    '                                Dim num As Integer = 0
-    '                                Do
-    '                                    modBdTC.myColor(num) = Color.FromArgb(Conversions.ToInteger(array(num)))
-    '                                    num += 1
-    '                                Loop While num <= 31
-    '                            End If
-    '                        End If
-    '                    End While
-    '                End If
-    '            End If
-    '        End While
-    '    Catch expr_8BC As Exception
-    '        ProjectData.SetProjectError(expr_8BC)
-    '        Dim ex As Exception = expr_8BC
-    '        Throw ex
-    '    End Try
-    'End Sub
+    Private Sub XML2Defa(ByVal rr As XmlTextReader)
+        ' The following expression was wrapped in a checked-statement
+        Try
+            While rr.Read()
+                Dim nodeType As XmlNodeType = rr.NodeType
+                Dim xmlNodeType As XmlNodeType = nodeType
+                If xmlNodeType = XmlNodeType.Element Then
+                    Dim name As String = rr.Name
+                    If name = "DEFAS" AndAlso rr.AttributeCount > 0 Then
+                        While rr.MoveToNextAttribute()
+                            Dim name2 As String = rr.Name
+                            If name2 = "QuanDoColor" Then
+                                modBdTC.QuanDoColor = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "QuanXanhColor" Then
+                                modBdTC.QuanXanhColor = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaGenPen1W" Then
+                                modBdTC.defaGenPen1W = Integer.Parse(Conversion.Int(rr.Value))
+                            ElseIf name2 = "defaGenPen1C" Then
+                                modBdTC.defaGenPen1C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaGenPen2W" Then
+                                modBdTC.defaGenPen2W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaGenPen2C" Then
+                                modBdTC.defaGenPen2C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaGenFill" Then
+                                modBdTC.defaGenFill = Boolean.Parse(Interaction.IIf(rr.Value = "True", True, False))
+                            ElseIf name2 = "defaGenFillC" Then
+                                modBdTC.defaGenFillC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaGenLineStyle" Then
+                                modBdTC.defaGenLineStyle = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaSongSongSize" Then
+                                modBdTC.defaSongSongSize = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaSongSongLinesNo" Then
+                                modBdTC.defaSongSongLinesNo = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaSongSongPen1W" Then
+                                modBdTC.defaSongSongPen1W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaSongSongPen1C" Then
+                                modBdTC.defaSongSongPen1C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaSongSongPen2W" Then
+                                modBdTC.defaSongSongPen2W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaSongSongPen2C" Then
+                                modBdTC.defaSongSongPen2C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaSongSongLineStyle" Then
+                                modBdTC.defaSongSongLineStyle = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenDoRong" Then
+                                modBdTC.defaMuiTenDoRong = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenPen1W" Then
+                                modBdTC.defaMuiTenPen1W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenPen1C" Then
+                                modBdTC.defaMuiTenPen1C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaMuiTenPen2W" Then
+                                modBdTC.defaMuiTenPen2W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenPen2C" Then
+                                modBdTC.defaMuiTenPen2C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaMuiTenFill" Then
+                                modBdTC.defaMuiTenFill = Boolean.Parse(Interaction.IIf(rr.Value = "True", True, False))
+                            ElseIf name2 = "defaMuiTenFillC" Then
+                                modBdTC.defaMuiTenFillC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaMuiTenDacDoDai" Then
+                                modBdTC.defaMuiTenDacDoDai = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenDacDoRong" Then
+                                modBdTC.defaMuiTenDacDoRong = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenDacPen1W" Then
+                                modBdTC.defaMuiTenDacPen1W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenDacPen1C" Then
+                                modBdTC.defaMuiTenDacPen1C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaMuiTenDacPen2W" Then
+                                modBdTC.defaMuiTenDacPen2W = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaMuiTenDacPen2C" Then
+                                modBdTC.defaMuiTenDacPen2C = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaMuiTenDacFill" Then
+                                modBdTC.defaMuiTenDacFill = Boolean.Parse(Interaction.IIf(rr.Value = "True", True, False))
+                            ElseIf name2 = "defaMuiTenDacFillC" Then
+                                modBdTC.defaMuiTenDacFillC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaTableColsNo" Then
+                                modBdTC.defaTableColsNo = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaTableRowsNo" Then
+                                modBdTC.defaTableRowsNo = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaTableBorderW" Then
+                                modBdTC.defaTableBorderW = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaTableBorderC" Then
+                                modBdTC.defaTableBorderC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaTableLineW" Then
+                                modBdTC.defaTableLineW = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaTableLineC" Then
+                                modBdTC.defaTableLineC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaTableFillC" Then
+                                modBdTC.defaTableFillC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaTableTFontName" Then
+                                modBdTC.defaTableTFontName = rr.Value
+                            ElseIf name2 = "defaTableTFontSize" Then
+                                modBdTC.defaTableTFontSize = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaTableTFontStyle" Then
+                                modBdTC.defaTableTFontStyle = Integer.Parse(rr.Value)
+                            ElseIf name2 = "defaTableTextC" Then
+                                modBdTC.defaTableTextC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "defaTextFontName" Then
+                                modBdTC.defaTextFontName = rr.Value
+                            ElseIf name2 = "defaTextFontSize" Then
+                                modBdTC.defaTextFontSize = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaTextFontStyle" Then
+                                modBdTC.defaTextFontStyle = Single.Parse(rr.Value)
+                            ElseIf name2 = "defaTextC" Then
+                                modBdTC.defaTextC = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "DanhDauColor" Then
+                                modBdTC.DanhDauColor = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "DanhDauColor2" Then
+                                modBdTC.DanhDauColor2 = Color.FromArgb(Integer.Parse(rr.Value))
+                            ElseIf name2 = "VeBoundColor" Then
+                                modBdTC.VeBoundColor = Color.FromKnownColor(CType(Integer.Parse(rr.Value), KnownColor))
+                            ElseIf name2 = "defaUndosNo" Then
+                                modBdTC.defaUndosNo = Integer.Parse(rr.Value)
+                            ElseIf name2 = "ColorsTable" Then
+                                Dim value As String = rr.Value
+                                Dim array As String() = value.Split(New Char() {" "c})
+                                If array.GetUpperBound(0) = 31 Then
+                                    Dim num As Integer = 0
+                                    Do
+                                        modBdTC.myColor(num) = Color.FromArgb(Integer.Parse(array(num)))
+                                        num += 1
+                                    Loop While num <= 31
+                                End If
+                            End If
+                        End While
+                    End If
+                End If
+            End While
+        Catch expr_8BC As Exception
+            'ProjectData.SetProjectError(expr_8BC)
+            'Dim ex As Exception = expr_8BC
+            'Throw ex
+        End Try
+    End Sub
 
-    'Public Sub Defa2File(ByVal pFileName As String)
-    '    Dim w As StreamWriter = New StreamWriter(pFileName)
-    '    Dim xmlTextWriter As XmlTextWriter = New XmlTextWriter(w)
-    '    modBdTC.Defa2xml(xmlTextWriter)
-    '    xmlTextWriter.Close()
-    'End Sub
+    Public Sub Defa2File(ByVal pFileName As String)
+        Dim w As StreamWriter = New StreamWriter(pFileName)
+        Dim xmlTextWriter As XmlTextWriter = New XmlTextWriter(w)
+        modBdTC.Defa2xml(xmlTextWriter)
+        xmlTextWriter.Close()
+    End Sub
 
-    'Private Sub Defa2xml(ByRef wr As XmlTextWriter)
-    '    wr.WriteStartElement("DEFAS")
-    '    wr.WriteAttributeString("QuanDoColor", Conversions.ToString(modBdTC.QuanDoColor.ToArgb()))
-    '    wr.WriteAttributeString("QuanXanhColor", Conversions.ToString(modBdTC.QuanXanhColor.ToArgb()))
-    '    wr.WriteAttributeString("defaGenPen1W", Conversions.ToString(modBdTC.defaGenPen1W))
-    '    wr.WriteAttributeString("defaGenPen1C", Conversions.ToString(modBdTC.defaGenPen1C.ToArgb()))
-    '    wr.WriteAttributeString("defaGenPen2W", Conversions.ToString(modBdTC.defaGenPen2W))
-    '    wr.WriteAttributeString("defaGenPen2C", Conversions.ToString(modBdTC.defaGenPen2C.ToArgb()))
-    '    wr.WriteAttributeString("defaGenFill", modBdTC.defaGenFill.ToString())
-    '    wr.WriteAttributeString("defaGenFillC", Conversions.ToString(modBdTC.defaGenFillC.ToArgb()))
-    '    wr.WriteAttributeString("defaGenLineStyle", Conversions.ToString(modBdTC.defaGenLineStyle))
-    '    wr.WriteAttributeString("defaSongSongSize", Conversions.ToString(modBdTC.defaSongSongSize))
-    '    wr.WriteAttributeString("defaSongSongLinesNo", Conversions.ToString(modBdTC.defaSongSongLinesNo))
-    '    wr.WriteAttributeString("defaSongSongPen1W", Conversions.ToString(modBdTC.defaSongSongPen1W))
-    '    wr.WriteAttributeString("defaSongSongPen1C", Conversions.ToString(modBdTC.defaSongSongPen1C.ToArgb()))
-    '    wr.WriteAttributeString("defaSongSongPen2W", Conversions.ToString(modBdTC.defaSongSongPen2W))
-    '    wr.WriteAttributeString("defaSongSongPen2C", Conversions.ToString(modBdTC.defaSongSongPen2C.ToArgb()))
-    '    wr.WriteAttributeString("defaSongSongLineStyle", Conversions.ToString(modBdTC.defaSongSongLineStyle))
-    '    wr.WriteAttributeString("defaMuiTenDoRong", Conversions.ToString(modBdTC.defaMuiTenDoRong))
-    '    wr.WriteAttributeString("defaMuiTenPen1W", Conversions.ToString(modBdTC.defaMuiTenPen1W))
-    '    wr.WriteAttributeString("defaMuiTenPen1C", Conversions.ToString(modBdTC.defaMuiTenPen1C.ToArgb()))
-    '    wr.WriteAttributeString("defaMuiTenPen2W", Conversions.ToString(modBdTC.defaMuiTenPen2W))
-    '    wr.WriteAttributeString("defaMuiTenPen2C", Conversions.ToString(modBdTC.defaMuiTenPen2C.ToArgb()))
-    '    wr.WriteAttributeString("defaMuiTenFill", modBdTC.defaMuiTenFill.ToString())
-    '    wr.WriteAttributeString("defaMuiTenFillC", Conversions.ToString(modBdTC.defaMuiTenFillC.ToArgb()))
-    '    wr.WriteAttributeString("defaMuiTenDacDoDai", Conversions.ToString(modBdTC.defaMuiTenDacDoDai))
-    '    wr.WriteAttributeString("defaMuiTenDacDoRong", Conversions.ToString(modBdTC.defaMuiTenDacDoRong))
-    '    wr.WriteAttributeString("defaMuiTenDacPen1W", Conversions.ToString(modBdTC.defaMuiTenDacPen1W))
-    '    wr.WriteAttributeString("defaMuiTenDacPen1C", Conversions.ToString(modBdTC.defaMuiTenDacPen1C.ToArgb()))
-    '    wr.WriteAttributeString("defaMuiTenDacPen2W", Conversions.ToString(modBdTC.defaMuiTenDacPen2W))
-    '    wr.WriteAttributeString("defaMuiTenDacPen2C", Conversions.ToString(modBdTC.defaMuiTenDacPen2C.ToArgb()))
-    '    wr.WriteAttributeString("defaMuiTenDacFill", modBdTC.defaMuiTenDacFill.ToString())
-    '    wr.WriteAttributeString("defaMuiTenDacFillC", Conversions.ToString(modBdTC.defaMuiTenDacFillC.ToArgb()))
-    '    wr.WriteAttributeString("defaTableColsNo", Conversions.ToString(modBdTC.defaTableColsNo))
-    '    wr.WriteAttributeString("defaTableRowsNo", Conversions.ToString(modBdTC.defaTableRowsNo))
-    '    wr.WriteAttributeString("defaTableBorderW", Conversions.ToString(modBdTC.defaTableBorderW))
-    '    wr.WriteAttributeString("defaTableBorderC", Conversions.ToString(modBdTC.defaTableBorderC.ToArgb()))
-    '    wr.WriteAttributeString("defaTableLineW", Conversions.ToString(modBdTC.defaTableLineW))
-    '    wr.WriteAttributeString("defaTableLineC", Conversions.ToString(modBdTC.defaTableLineC.ToArgb()))
-    '    wr.WriteAttributeString("defaTableFillC", Conversions.ToString(modBdTC.defaTableFillC.ToArgb()))
-    '    wr.WriteAttributeString("defaTableTFontName", modBdTC.defaTableTFontName)
-    '    wr.WriteAttributeString("defaTableTFontSize", Conversions.ToString(modBdTC.defaTableTFontSize))
-    '    wr.WriteAttributeString("defaTableTFontStyle", Conversions.ToString(modBdTC.defaTableTFontStyle))
-    '    wr.WriteAttributeString("defaTableTextC", Conversions.ToString(modBdTC.defaTableTextC.ToArgb()))
-    '    wr.WriteAttributeString("defaTextFontName", modBdTC.defaTextFontName)
-    '    wr.WriteAttributeString("defaTextFontSize", Conversions.ToString(modBdTC.defaTextFontSize))
-    '    wr.WriteAttributeString("defaTextFontStyle", Conversions.ToString(modBdTC.defaTextFontStyle))
-    '    wr.WriteAttributeString("defaTextC", Conversions.ToString(modBdTC.defaTextC.ToArgb()))
-    '    wr.WriteAttributeString("DanhDauColor", Conversions.ToString(modBdTC.DanhDauColor.ToArgb()))
-    '    wr.WriteAttributeString("DanhDauColor2", Conversions.ToString(modBdTC.DanhDauColor2.ToArgb()))
-    '    wr.WriteAttributeString("VeBoundColor", Conversions.ToString(CInt(modBdTC.VeBoundColor.ToKnownColor())))
-    '    wr.WriteAttributeString("defaUndosNo", Conversions.ToString(modBdTC.defaUndosNo))
-    '    Dim text As String = Conversions.ToString(modBdTC.myColor(0).ToArgb())
-    '    Dim num As Integer = 1
-    '    ' The following expression was wrapped in a checked-statement
-    '    Do
-    '        text = text + " " + Conversions.ToString(modBdTC.myColor(num).ToArgb())
-    '        num += 1
-    '    Loop While num <= 31
-    '    wr.WriteAttributeString("ColorsTable", text)
-    '    wr.WriteEndElement()
-    'End Sub
+    Private Sub Defa2xml(ByRef wr As XmlTextWriter)
+        wr.WriteStartElement("DEFAS")
+        wr.WriteAttributeString("QuanDoColor", modBdTC.QuanDoColor.ToArgb().ToString())
+        wr.WriteAttributeString("QuanXanhColor", modBdTC.QuanXanhColor.ToArgb().ToString())
+        wr.WriteAttributeString("defaGenPen1W", modBdTC.defaGenPen1W)
+        wr.WriteAttributeString("defaGenPen1C", modBdTC.defaGenPen1C.ToArgb().ToString())
+        wr.WriteAttributeString("defaGenPen2W", modBdTC.defaGenPen2W)
+        wr.WriteAttributeString("defaGenPen2C", modBdTC.defaGenPen2C.ToArgb().ToString())
+        wr.WriteAttributeString("defaGenFill", modBdTC.defaGenFill.ToString())
+        wr.WriteAttributeString("defaGenFillC", modBdTC.defaGenFillC.ToArgb().ToString())
+        wr.WriteAttributeString("defaGenLineStyle", modBdTC.defaGenLineStyle)
+        wr.WriteAttributeString("defaSongSongSize", modBdTC.defaSongSongSize)
+        wr.WriteAttributeString("defaSongSongLinesNo", modBdTC.defaSongSongLinesNo)
+        wr.WriteAttributeString("defaSongSongPen1W", modBdTC.defaSongSongPen1W)
+        wr.WriteAttributeString("defaSongSongPen1C", modBdTC.defaSongSongPen1C.ToArgb().ToString())
+        wr.WriteAttributeString("defaSongSongPen2W", modBdTC.defaSongSongPen2W)
+        wr.WriteAttributeString("defaSongSongPen2C", modBdTC.defaSongSongPen2C.ToArgb().ToString())
+        wr.WriteAttributeString("defaSongSongLineStyle", modBdTC.defaSongSongLineStyle)
+        wr.WriteAttributeString("defaMuiTenDoRong", modBdTC.defaMuiTenDoRong)
+        wr.WriteAttributeString("defaMuiTenPen1W", modBdTC.defaMuiTenPen1W)
+        wr.WriteAttributeString("defaMuiTenPen1C", modBdTC.defaMuiTenPen1C.ToArgb().ToString())
+        wr.WriteAttributeString("defaMuiTenPen2W", modBdTC.defaMuiTenPen2W)
+        wr.WriteAttributeString("defaMuiTenPen2C", modBdTC.defaMuiTenPen2C.ToArgb().ToString())
+        wr.WriteAttributeString("defaMuiTenFill", modBdTC.defaMuiTenFill.ToString())
+        wr.WriteAttributeString("defaMuiTenFillC", modBdTC.defaMuiTenFillC.ToArgb().ToString())
+        wr.WriteAttributeString("defaMuiTenDacDoDai", modBdTC.defaMuiTenDacDoDai)
+        wr.WriteAttributeString("defaMuiTenDacDoRong", modBdTC.defaMuiTenDacDoRong)
+        wr.WriteAttributeString("defaMuiTenDacPen1W", modBdTC.defaMuiTenDacPen1W)
+        wr.WriteAttributeString("defaMuiTenDacPen1C", modBdTC.defaMuiTenDacPen1C.ToArgb().ToString())
+        wr.WriteAttributeString("defaMuiTenDacPen2W", modBdTC.defaMuiTenDacPen2W)
+        wr.WriteAttributeString("defaMuiTenDacPen2C", modBdTC.defaMuiTenDacPen2C.ToArgb().ToString())
+        wr.WriteAttributeString("defaMuiTenDacFill", modBdTC.defaMuiTenDacFill.ToString())
+        wr.WriteAttributeString("defaMuiTenDacFillC", modBdTC.defaMuiTenDacFillC.ToArgb().ToString())
+        wr.WriteAttributeString("defaTableColsNo", modBdTC.defaTableColsNo)
+        wr.WriteAttributeString("defaTableRowsNo", modBdTC.defaTableRowsNo)
+        wr.WriteAttributeString("defaTableBorderW", modBdTC.defaTableBorderW)
+        wr.WriteAttributeString("defaTableBorderC", modBdTC.defaTableBorderC.ToArgb().ToString())
+        wr.WriteAttributeString("defaTableLineW", modBdTC.defaTableLineW)
+        wr.WriteAttributeString("defaTableLineC", modBdTC.defaTableLineC.ToArgb().ToString())
+        wr.WriteAttributeString("defaTableFillC", modBdTC.defaTableFillC.ToArgb().ToString())
+        wr.WriteAttributeString("defaTableTFontName", modBdTC.defaTableTFontName)
+        wr.WriteAttributeString("defaTableTFontSize", modBdTC.defaTableTFontSize)
+        wr.WriteAttributeString("defaTableTFontStyle", modBdTC.defaTableTFontStyle)
+        wr.WriteAttributeString("defaTableTextC", modBdTC.defaTableTextC.ToArgb().ToString())
+        wr.WriteAttributeString("defaTextFontName", modBdTC.defaTextFontName)
+        wr.WriteAttributeString("defaTextFontSize", modBdTC.defaTextFontSize)
+        wr.WriteAttributeString("defaTextFontStyle", modBdTC.defaTextFontStyle)
+        wr.WriteAttributeString("defaTextC", modBdTC.defaTextC.ToArgb().ToString())
+        wr.WriteAttributeString("DanhDauColor", modBdTC.DanhDauColor.ToArgb().ToString())
+        wr.WriteAttributeString("DanhDauColor2", modBdTC.DanhDauColor2.ToArgb().ToString())
+        wr.WriteAttributeString("VeBoundColor", CInt(modBdTC.VeBoundColor.ToKnownColor()).ToString())
+        wr.WriteAttributeString("defaUndosNo", modBdTC.defaUndosNo)
+        Dim text As String = modBdTC.myColor(0).ToArgb().ToString()
+        Dim num As Integer = 1
+        ' The following expression was wrapped in a checked-statement
+        Do
+            text = text + " " + modBdTC.myColor(num).ToArgb()
+            num += 1
+        Loop While num <= 31
+        wr.WriteAttributeString("ColorsTable", text)
+        wr.WriteEndElement()
+    End Sub
 
     'Public Function GetMau(ByVal pColor As Color) As Color
     '    Dim dlgGetColor As dlgGetColor = New dlgGetColor()
@@ -402,14 +402,15 @@ Module modBdTC
                 Next
             End If
         Catch arg_139_0 As Exception
-            ProjectData.SetProjectError(arg_139_0)
-            ProjectData.ClearProjectError()
+            'ProjectData.SetProjectError(arg_139_0)
+            'ProjectData.ClearProjectError()
         Finally
             pen.Dispose()
             solidBrush.Dispose()
         End Try
     End Sub
 
+    '-- modBanDo --
     Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PT3 As PointF, ByVal PT4 As PointF) As Object
         Dim pointF As PointF = Nothing
         If PT2.X = PT1.X Then
@@ -433,18 +434,19 @@ Module modBdTC
         Return result
     End Function
 
+    '-- modBanDo --
     Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs As PointF(), ByVal index As Integer) As Object
         ' The following expression was wrapped in a checked-statement
         Dim result As Object
         If PTs.GetUpperBound(0) >= index + 1 Then
             Dim num As Integer = PTs.GetUpperBound(0) - 1
             For i As Integer = index To num
-                Dim objectValue As Object = RuntimeHelpers.GetObjectValue(modBdTC.GetIntersectPoint(PT1, PT2, PTs(i), PTs(i + 1)))
-                If Not Information.IsNothing(RuntimeHelpers.GetObjectValue(objectValue)) Then
+                Dim objectValue As Object = modBdTC.GetIntersectPoint(PT1, PT2, PTs(i), PTs(i + 1))
+                If Not Information.IsNothing(objectValue) Then
                     Dim expr_52 As Object = objectValue
                     Dim iNTERSECTNODE As modBdTC.INTERSECTNODE
                     Dim pointF As PointF
-						iNTERSECTNODE.PT = (If((expr_52 IsNot Nothing), (CType(expr_52, PointF)), pointF))
+                    iNTERSECTNODE.PT = IIf((objectValue IsNot Nothing), (CType(expr_52, PointF)), pointF)
                     iNTERSECTNODE.NodeIndex = i
                     result = iNTERSECTNODE
                     Return result

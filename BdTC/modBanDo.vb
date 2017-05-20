@@ -8,11 +8,11 @@ Imports System.Xml
 Imports DBiGraphicObjs.DBiGraphicObjects
 
 Module modBanDo
-    '-- modBanDo --
+    '-- modBdTC --
     'Public cDecSepa As Char = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
     'Public cGrpSepa As Char = Application.CurrentCulture.NumberFormat.NumberGroupSeparator
 
-    '-- modBanDo --
+    '-- modBdTC --
     'Public Structure UNDOITEM
     '    Dim UndoSymbols As CSymbols
     '    Dim MapX As Double
@@ -20,7 +20,7 @@ Module modBanDo
     '    Dim SeleSymbol As CSymbol
     'End Structure
 
-    '-- modBanDo --
+    '-- modBdTC --
     'Public Structure INTERSECTNODE
     '    Dim PT As PointF
     '    Dim NodeIndex As Integer
@@ -37,6 +37,10 @@ Module modBanDo
 
     Public Const myToolInfo As Integer = 3
     Public Const NHAPNHAYDELAY As Integer = 100
+
+    Public myMapGst As String = "BanDo.gst"
+    Public myMapNhoGst As String = "BanDoNho.gst"
+    Public BDSaiSo As Double = 1.0
 
     '-- modBDTC --
     'Public myDefaFileName As String = "Defas.def"
@@ -91,6 +95,8 @@ Module modBanDo
     Public BDKinhDo As Double = 104.255
     Public BDViDo As Double = 17.0
     Public BDZoomLevel As Double = 4000
+
+    Public myCoordSysType As Integer = 1
 
     '-- modBDTC --
     'Public DanhDauColor As Color = Color.FromArgb(75, Color.Red)
@@ -216,47 +222,49 @@ Module modBanDo
     '    Return kq
     'End Function
 
-    Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PT3 As PointF, ByVal PT4 As PointF) As Object
-        Dim mPT As PointF = Nothing
+    '-- modBDTC --
+    'Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PT3 As PointF, ByVal PT4 As PointF) As Object
+    '    Dim mPT As PointF = Nothing
 
-        Dim mPath1, mPath2 As GraphicsPath
-        If PT2.X = PT1.X Then
-            PT2.X += 1
-        End If
-        mPath1 = New GraphicsPath
-        mPath1.AddLine(PT1, PT2)
-        mPath2 = New GraphicsPath
-        mPath2.AddLine(PT3, PT4)
-        mPT = COtherLineStyle.GiaoDiem(PT1, PT2, PT3, PT4)
-        If mPath1.IsOutlineVisible(mPT, New Pen(Color.Black, 2)) = True Then
-            If mPath2.IsOutlineVisible(mPT, New Pen(Color.Black, 2)) = True Then
-                Return mPT
-            Else
-                Return Nothing
-            End If
-        Else
-            Return Nothing
-        End If
-    End Function
+    '    Dim mPath1, mPath2 As GraphicsPath
+    '    If PT2.X = PT1.X Then
+    '        PT2.X += 1
+    '    End If
+    '    mPath1 = New GraphicsPath
+    '    mPath1.AddLine(PT1, PT2)
+    '    mPath2 = New GraphicsPath
+    '    mPath2.AddLine(PT3, PT4)
+    '    mPT = COtherLineStyle.GiaoDiem(PT1, PT2, PT3, PT4)
+    '    If mPath1.IsOutlineVisible(mPT, New Pen(Color.Black, 2)) = True Then
+    '        If mPath2.IsOutlineVisible(mPT, New Pen(Color.Black, 2)) = True Then
+    '            Return mPT
+    '        Else
+    '            Return Nothing
+    '        End If
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
 
-    Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs() As PointF, ByVal index As Integer) As Object
-        Dim mPT As Object
-        Dim mINTERSECTNODE As INTERSECTNODE
-        If PTs.GetUpperBound(0) >= index + 1 Then
-            For i As Integer = index To PTs.GetUpperBound(0) - 1
-                mPT = GetIntersectPoint(PT1, PT2, PTs(i), PTs(i + 1))
-                If Not IsNothing(mPT) Then
-                    mINTERSECTNODE.PT = CType(mPT, PointF)
-                    mINTERSECTNODE.NodeIndex = i
-                    Return mINTERSECTNODE
-                End If
-            Next
+    '-- modBDTC --
+    'Private Function GetIntersectPoint(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs() As PointF, ByVal index As Integer) As Object
+    '    Dim mPT As Object
+    '    Dim mINTERSECTNODE As INTERSECTNODE
+    '    If PTs.GetUpperBound(0) >= index + 1 Then
+    '        For i As Integer = index To PTs.GetUpperBound(0) - 1
+    '            mPT = GetIntersectPoint(PT1, PT2, PTs(i), PTs(i + 1))
+    '            If Not IsNothing(mPT) Then
+    '                mINTERSECTNODE.PT = CType(mPT, PointF)
+    '                mINTERSECTNODE.NodeIndex = i
+    '                Return mINTERSECTNODE
+    '            End If
+    '        Next
 
-            Return Nothing
-        Else
-            Return Nothing
-        End If
-    End Function
+    '        Return Nothing
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
 
     '-- modBDTC --
     'Public Function GetIntersectPoints(ByVal PT1 As PointF, ByVal PT2 As PointF, ByVal PTs() As PointF) As INTERSECTNODE()
@@ -288,6 +296,7 @@ Module modBanDo
     '    Return Angle
     'End Function
 
+    '-- modBDTC --
     'Public Function ObjToCurve(ByVal pObj As GraphicObject) As GraphicObject
     '    Dim gObj As GraphicObject = Nothing
 
@@ -381,242 +390,246 @@ Module modBanDo
     '    End If
     'End Function
 
-    Public Sub LoadDefa(ByVal pFileName As String)
-        Try
-            Dim rr As XmlTextReader = New XmlTextReader(pFileName)
-            XML2Defa(rr)
-            rr.Close()
+    ' --- modBdTC ---
+    'Public Sub LoadDefa(ByVal pFileName As String)
+    '    Try
+    '        Dim rr As XmlTextReader = New XmlTextReader(pFileName)
+    '        XML2Defa(rr)
+    '        rr.Close()
 
-            defaTableTFont = New Font(defaTableTFontName, defaTableTFontSize, defaTableTFontStyle, GraphicsUnit.Point)
-            defaTextFont = New Font(defaTextFontName, defaTextFontSize, defaTextFontStyle, GraphicsUnit.Point)
+    '        defaTableTFont = New Font(defaTableTFontName, defaTableTFontSize, defaTableTFontStyle, GraphicsUnit.Point)
+    '        defaTextFont = New Font(defaTextFontName, defaTextFontSize, defaTextFontStyle, GraphicsUnit.Point)
 
-        Catch ex As Exception
-        End Try
-    End Sub
+    '    Catch ex As Exception
+    '    End Try
+    'End Sub
 
-    Private Sub XML2Defa(ByVal rr As XmlTextReader)
+    ' --- modBdTC ---
+    'Private Sub XML2Defa(ByVal rr As XmlTextReader)
 
-        Dim oNodeType As XmlNodeType
-        Try
-            Do While rr.Read
-                oNodeType = rr.NodeType
-                Select Case oNodeType
-                    Case XmlNodeType.Element
-                        Select Case rr.Name
-                            Case "DEFAS"
-                                If rr.AttributeCount > 0 Then
-                                    Do While rr.MoveToNextAttribute
-                                        Select Case rr.Name
-                                            Case "QuanDoColor"
-                                                QuanDoColor = Color.FromArgb(rr.Value)
-                                            Case "QuanXanhColor"
-                                                QuanXanhColor = Color.FromArgb(rr.Value)
-                                            Case "defaGenPen1W"
-                                                defaGenPen1W = Int(rr.Value)
-                                            Case "defaGenPen1C"
-                                                defaGenPen1C = Color.FromArgb(rr.Value)
-                                            Case "defaGenPen2W"
-                                                defaGenPen2W = rr.Value
-                                            Case "defaGenPen2C"
-                                                defaGenPen2C = Color.FromArgb(rr.Value)
-                                            Case "defaGenFill"
-                                                defaGenFill = IIf(rr.Value = "True", True, False)
-                                            Case "defaGenFillC"
-                                                defaGenFillC = Color.FromArgb(rr.Value)
-                                            Case "defaGenLineStyle"
-                                                defaGenLineStyle = rr.Value
-                                            Case "defaSongSongSize"
-                                                defaSongSongSize = rr.Value
-                                            Case "defaSongSongLinesNo"
-                                                defaSongSongLinesNo = rr.Value
-                                            Case "defaSongSongPen1W"
-                                                defaSongSongPen1W = rr.Value
-                                            Case "defaSongSongPen1C"
-                                                defaSongSongPen1C = Color.FromArgb(rr.Value)
-                                            Case "defaSongSongPen2W"
-                                                defaSongSongPen2W = rr.Value
-                                            Case "defaSongSongPen2C"
-                                                defaSongSongPen2C = Color.FromArgb(rr.Value)
-                                            Case "defaSongSongLineStyle"
-                                                defaSongSongLineStyle = rr.Value
+    '    Dim oNodeType As XmlNodeType
+    '    Try
+    '        Do While rr.Read
+    '            oNodeType = rr.NodeType
+    '            Select Case oNodeType
+    '                Case XmlNodeType.Element
+    '                    Select Case rr.Name
+    '                        Case "DEFAS"
+    '                            If rr.AttributeCount > 0 Then
+    '                                Do While rr.MoveToNextAttribute
+    '                                    Select Case rr.Name
+    '                                        Case "QuanDoColor"
+    '                                            QuanDoColor = Color.FromArgb(rr.Value)
+    '                                        Case "QuanXanhColor"
+    '                                            QuanXanhColor = Color.FromArgb(rr.Value)
+    '                                        Case "defaGenPen1W"
+    '                                            defaGenPen1W = Int(rr.Value)
+    '                                        Case "defaGenPen1C"
+    '                                            defaGenPen1C = Color.FromArgb(rr.Value)
+    '                                        Case "defaGenPen2W"
+    '                                            defaGenPen2W = rr.Value
+    '                                        Case "defaGenPen2C"
+    '                                            defaGenPen2C = Color.FromArgb(rr.Value)
+    '                                        Case "defaGenFill"
+    '                                            defaGenFill = IIf(rr.Value = "True", True, False)
+    '                                        Case "defaGenFillC"
+    '                                            defaGenFillC = Color.FromArgb(rr.Value)
+    '                                        Case "defaGenLineStyle"
+    '                                            defaGenLineStyle = rr.Value
+    '                                        Case "defaSongSongSize"
+    '                                            defaSongSongSize = rr.Value
+    '                                        Case "defaSongSongLinesNo"
+    '                                            defaSongSongLinesNo = rr.Value
+    '                                        Case "defaSongSongPen1W"
+    '                                            defaSongSongPen1W = rr.Value
+    '                                        Case "defaSongSongPen1C"
+    '                                            defaSongSongPen1C = Color.FromArgb(rr.Value)
+    '                                        Case "defaSongSongPen2W"
+    '                                            defaSongSongPen2W = rr.Value
+    '                                        Case "defaSongSongPen2C"
+    '                                            defaSongSongPen2C = Color.FromArgb(rr.Value)
+    '                                        Case "defaSongSongLineStyle"
+    '                                            defaSongSongLineStyle = rr.Value
 
-                                            Case "defaMuiTenDoRong"
-                                                defaMuiTenDoRong = rr.Value
-                                            Case "defaMuiTenPen1W"
-                                                defaMuiTenPen1W = rr.Value
-                                            Case "defaMuiTenPen1C"
-                                                defaMuiTenPen1C = Color.FromArgb(rr.Value)
-                                            Case "defaMuiTenPen2W"
-                                                defaMuiTenPen2W = rr.Value
-                                            Case "defaMuiTenPen2C"
-                                                defaMuiTenPen2C = Color.FromArgb(rr.Value)
-                                            Case "defaMuiTenFill"
-                                                defaMuiTenFill = IIf(rr.Value = "True", True, False)
-                                            Case "defaMuiTenFillC"
-                                                defaMuiTenFillC = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenDoRong"
+    '                                            defaMuiTenDoRong = rr.Value
+    '                                        Case "defaMuiTenPen1W"
+    '                                            defaMuiTenPen1W = rr.Value
+    '                                        Case "defaMuiTenPen1C"
+    '                                            defaMuiTenPen1C = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenPen2W"
+    '                                            defaMuiTenPen2W = rr.Value
+    '                                        Case "defaMuiTenPen2C"
+    '                                            defaMuiTenPen2C = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenFill"
+    '                                            defaMuiTenFill = IIf(rr.Value = "True", True, False)
+    '                                        Case "defaMuiTenFillC"
+    '                                            defaMuiTenFillC = Color.FromArgb(rr.Value)
 
-                                            Case "defaMuiTenDacDoDai"
-                                                defaMuiTenDacDoDai = rr.Value
-                                            Case "defaMuiTenDacDoRong"
-                                                defaMuiTenDacDoRong = rr.Value
-                                            Case "defaMuiTenDacPen1W"
-                                                defaMuiTenDacPen1W = rr.Value
-                                            Case "defaMuiTenDacPen1C"
-                                                defaMuiTenDacPen1C = Color.FromArgb(rr.Value)
-                                            Case "defaMuiTenDacPen2W"
-                                                defaMuiTenDacPen2W = rr.Value
-                                            Case "defaMuiTenDacPen2C"
-                                                defaMuiTenDacPen2C = Color.FromArgb(rr.Value)
-                                            Case "defaMuiTenDacFill"
-                                                defaMuiTenDacFill = IIf(rr.Value = "True", True, False)
-                                            Case "defaMuiTenDacFillC"
-                                                defaMuiTenDacFillC = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenDacDoDai"
+    '                                            defaMuiTenDacDoDai = rr.Value
+    '                                        Case "defaMuiTenDacDoRong"
+    '                                            defaMuiTenDacDoRong = rr.Value
+    '                                        Case "defaMuiTenDacPen1W"
+    '                                            defaMuiTenDacPen1W = rr.Value
+    '                                        Case "defaMuiTenDacPen1C"
+    '                                            defaMuiTenDacPen1C = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenDacPen2W"
+    '                                            defaMuiTenDacPen2W = rr.Value
+    '                                        Case "defaMuiTenDacPen2C"
+    '                                            defaMuiTenDacPen2C = Color.FromArgb(rr.Value)
+    '                                        Case "defaMuiTenDacFill"
+    '                                            defaMuiTenDacFill = IIf(rr.Value = "True", True, False)
+    '                                        Case "defaMuiTenDacFillC"
+    '                                            defaMuiTenDacFillC = Color.FromArgb(rr.Value)
 
-                                            Case "defaTableColsNo"
-                                                defaTableColsNo = rr.Value
-                                            Case "defaTableRowsNo"
-                                                defaTableRowsNo = rr.Value
-                                            Case "defaTableBorderW"
-                                                defaTableBorderW = rr.Value
-                                            Case "defaTableBorderC"
-                                                defaTableBorderC = Color.FromArgb(rr.Value)
-                                            Case "defaTableLineW"
-                                                defaTableLineW = rr.Value
-                                            Case "defaTableLineC"
-                                                defaTableLineC = Color.FromArgb(rr.Value)
-                                            Case "defaTableFillC"
-                                                defaTableFillC = Color.FromArgb(rr.Value)
+    '                                        Case "defaTableColsNo"
+    '                                            defaTableColsNo = rr.Value
+    '                                        Case "defaTableRowsNo"
+    '                                            defaTableRowsNo = rr.Value
+    '                                        Case "defaTableBorderW"
+    '                                            defaTableBorderW = rr.Value
+    '                                        Case "defaTableBorderC"
+    '                                            defaTableBorderC = Color.FromArgb(rr.Value)
+    '                                        Case "defaTableLineW"
+    '                                            defaTableLineW = rr.Value
+    '                                        Case "defaTableLineC"
+    '                                            defaTableLineC = Color.FromArgb(rr.Value)
+    '                                        Case "defaTableFillC"
+    '                                            defaTableFillC = Color.FromArgb(rr.Value)
 
-                                            Case "defaTableTFontName"
-                                                defaTableTFontName = rr.Value
-                                            Case "defaTableTFontSize"
-                                                defaTableTFontSize = rr.Value
-                                            Case "defaTableTFontStyle"
-                                                defaTableTFontStyle = rr.Value
-                                            Case "defaTableTextC"
-                                                defaTableTextC = Color.FromArgb(rr.Value)
+    '                                        Case "defaTableTFontName"
+    '                                            defaTableTFontName = rr.Value
+    '                                        Case "defaTableTFontSize"
+    '                                            defaTableTFontSize = rr.Value
+    '                                        Case "defaTableTFontStyle"
+    '                                            defaTableTFontStyle = rr.Value
+    '                                        Case "defaTableTextC"
+    '                                            defaTableTextC = Color.FromArgb(rr.Value)
 
-                                            Case "defaTextFontName"
-                                                defaTextFontName = rr.Value
-                                            Case "defaTextFontSize"
-                                                defaTextFontSize = rr.Value
-                                            Case "defaTextFontStyle"
-                                                defaTextFontStyle = rr.Value
-                                            Case "defaTextC"
-                                                defaTextC = Color.FromArgb(rr.Value)
-                                            Case "DanhDauColor"
-                                                DanhDauColor = Color.FromArgb(rr.Value)
-                                            Case "DanhDauColor2"
-                                                DanhDauColor2 = Color.FromArgb(rr.Value)
-                                            Case "VeBoundColor"
-                                                VeBoundColor = Color.FromKnownColor(rr.Value) ' Color.FromKnownColor(KnownColor.HotTrack)
+    '                                        Case "defaTextFontName"
+    '                                            defaTextFontName = rr.Value
+    '                                        Case "defaTextFontSize"
+    '                                            defaTextFontSize = rr.Value
+    '                                        Case "defaTextFontStyle"
+    '                                            defaTextFontStyle = rr.Value
+    '                                        Case "defaTextC"
+    '                                            defaTextC = Color.FromArgb(rr.Value)
+    '                                        Case "DanhDauColor"
+    '                                            DanhDauColor = Color.FromArgb(rr.Value)
+    '                                        Case "DanhDauColor2"
+    '                                            DanhDauColor2 = Color.FromArgb(rr.Value)
+    '                                        Case "VeBoundColor"
+    '                                            VeBoundColor = Color.FromKnownColor(rr.Value) ' Color.FromKnownColor(KnownColor.HotTrack)
 
-                                            Case "defaUndosNo"
-                                                defaUndosNo = rr.Value
-                                            Case "ColorsTable"
-                                                Dim strColors As String = rr.Value
-                                                Dim data() As String = strColors.Split(" "c)
-                                                If data.GetUpperBound(0) = 31 Then
-                                                    For i As Integer = 0 To 31
-                                                        myColor(i) = Color.FromArgb(data(i))
-                                                    Next
-                                                End If
+    '                                        Case "defaUndosNo"
+    '                                            defaUndosNo = rr.Value
+    '                                        Case "ColorsTable"
+    '                                            Dim strColors As String = rr.Value
+    '                                            Dim data() As String = strColors.Split(" "c)
+    '                                            If data.GetUpperBound(0) = 31 Then
+    '                                                For i As Integer = 0 To 31
+    '                                                    myColor(i) = Color.FromArgb(data(i))
+    '                                                Next
+    '                                            End If
 
-                                        End Select
-                                    Loop
-                                End If
-                        End Select
-                End Select
-            Loop
-        Catch e As Exception
-            'MsgBox("Khong doc duoc Defa.")
-            Throw e
-        End Try
-    End Sub
+    '                                    End Select
+    '                                Loop
+    '                            End If
+    '                    End Select
+    '            End Select
+    '        Loop
+    '    Catch e As Exception
+    '        'MsgBox("Khong doc duoc Defa.")
+    '        Throw e
+    '    End Try
+    'End Sub
 
-    Public Sub Defa2File(ByVal pFileName As String)
-        Dim sw As New StreamWriter(pFileName)
-        Dim wr As XmlTextWriter = New XmlTextWriter(sw)
+    ' --- modBdTC ---
+    'Public Sub Defa2File(ByVal pFileName As String)
+    '    Dim sw As New StreamWriter(pFileName)
+    '    Dim wr As XmlTextWriter = New XmlTextWriter(sw)
 
-        Defa2xml(wr)
+    '    Defa2xml(wr)
 
-        wr.Close()
+    '    wr.Close()
 
-    End Sub
+    'End Sub
 
-    Private Sub Defa2xml(ByRef wr As XmlTextWriter)
-        wr.WriteStartElement("DEFAS")
+    ' --- modBdTC ---
+    'Private Sub Defa2xml(ByRef wr As XmlTextWriter)
+    '    wr.WriteStartElement("DEFAS")
 
-        wr.WriteAttributeString("QuanDoColor", QuanDoColor.ToArgb)
-        wr.WriteAttributeString("QuanXanhColor", QuanXanhColor.ToArgb)
+    '    wr.WriteAttributeString("QuanDoColor", QuanDoColor.ToArgb)
+    '    wr.WriteAttributeString("QuanXanhColor", QuanXanhColor.ToArgb)
 
-        wr.WriteAttributeString("defaGenPen1W", defaGenPen1W)
-        wr.WriteAttributeString("defaGenPen1C", defaGenPen1C.ToArgb)
-        wr.WriteAttributeString("defaGenPen2W", defaGenPen2W)
-        wr.WriteAttributeString("defaGenPen2C", defaGenPen2C.ToArgb)
-        wr.WriteAttributeString("defaGenFill", defaGenFill.ToString)
-        wr.WriteAttributeString("defaGenFillC", defaGenFillC.ToArgb)
-        wr.WriteAttributeString("defaGenLineStyle", defaGenLineStyle)
+    '    wr.WriteAttributeString("defaGenPen1W", defaGenPen1W)
+    '    wr.WriteAttributeString("defaGenPen1C", defaGenPen1C.ToArgb)
+    '    wr.WriteAttributeString("defaGenPen2W", defaGenPen2W)
+    '    wr.WriteAttributeString("defaGenPen2C", defaGenPen2C.ToArgb)
+    '    wr.WriteAttributeString("defaGenFill", defaGenFill.ToString)
+    '    wr.WriteAttributeString("defaGenFillC", defaGenFillC.ToArgb)
+    '    wr.WriteAttributeString("defaGenLineStyle", defaGenLineStyle)
 
-        wr.WriteAttributeString("defaSongSongSize", defaSongSongSize)
-        wr.WriteAttributeString("defaSongSongLinesNo", defaSongSongLinesNo)
-        wr.WriteAttributeString("defaSongSongPen1W", defaSongSongPen1W)
-        wr.WriteAttributeString("defaSongSongPen1C", defaSongSongPen1C.ToArgb)
-        wr.WriteAttributeString("defaSongSongPen2W", defaSongSongPen2W)
-        wr.WriteAttributeString("defaSongSongPen2C", defaSongSongPen2C.ToArgb)
-        wr.WriteAttributeString("defaSongSongLineStyle", defaSongSongLineStyle)
+    '    wr.WriteAttributeString("defaSongSongSize", defaSongSongSize)
+    '    wr.WriteAttributeString("defaSongSongLinesNo", defaSongSongLinesNo)
+    '    wr.WriteAttributeString("defaSongSongPen1W", defaSongSongPen1W)
+    '    wr.WriteAttributeString("defaSongSongPen1C", defaSongSongPen1C.ToArgb)
+    '    wr.WriteAttributeString("defaSongSongPen2W", defaSongSongPen2W)
+    '    wr.WriteAttributeString("defaSongSongPen2C", defaSongSongPen2C.ToArgb)
+    '    wr.WriteAttributeString("defaSongSongLineStyle", defaSongSongLineStyle)
 
-        wr.WriteAttributeString("defaMuiTenDoRong", defaMuiTenDoRong)
-        wr.WriteAttributeString("defaMuiTenPen1W", defaMuiTenPen1W)
-        wr.WriteAttributeString("defaMuiTenPen1C", defaMuiTenPen1C.ToArgb)
-        wr.WriteAttributeString("defaMuiTenPen2W", defaMuiTenPen2W)
-        wr.WriteAttributeString("defaMuiTenPen2C", defaMuiTenPen2C.ToArgb)
-        wr.WriteAttributeString("defaMuiTenFill", defaMuiTenFill.ToString)
-        wr.WriteAttributeString("defaMuiTenFillC", defaMuiTenFillC.ToArgb) 'Color.Red
+    '    wr.WriteAttributeString("defaMuiTenDoRong", defaMuiTenDoRong)
+    '    wr.WriteAttributeString("defaMuiTenPen1W", defaMuiTenPen1W)
+    '    wr.WriteAttributeString("defaMuiTenPen1C", defaMuiTenPen1C.ToArgb)
+    '    wr.WriteAttributeString("defaMuiTenPen2W", defaMuiTenPen2W)
+    '    wr.WriteAttributeString("defaMuiTenPen2C", defaMuiTenPen2C.ToArgb)
+    '    wr.WriteAttributeString("defaMuiTenFill", defaMuiTenFill.ToString)
+    '    wr.WriteAttributeString("defaMuiTenFillC", defaMuiTenFillC.ToArgb) 'Color.Red
 
-        wr.WriteAttributeString("defaMuiTenDacDoDai", defaMuiTenDacDoDai)
-        wr.WriteAttributeString("defaMuiTenDacDoRong", defaMuiTenDacDoRong)
-        wr.WriteAttributeString("defaMuiTenDacPen1W", defaMuiTenDacPen1W)
-        wr.WriteAttributeString("defaMuiTenDacPen1C", defaMuiTenDacPen1C.ToArgb)
-        wr.WriteAttributeString("defaMuiTenDacPen2W", defaMuiTenDacPen2W)
-        wr.WriteAttributeString("defaMuiTenDacPen2C", defaMuiTenDacPen2C.ToArgb)
-        wr.WriteAttributeString("defaMuiTenDacFill", defaMuiTenDacFill.ToString)
-        wr.WriteAttributeString("defaMuiTenDacFillC", defaMuiTenDacFillC.ToArgb) 'Color.Red
+    '    wr.WriteAttributeString("defaMuiTenDacDoDai", defaMuiTenDacDoDai)
+    '    wr.WriteAttributeString("defaMuiTenDacDoRong", defaMuiTenDacDoRong)
+    '    wr.WriteAttributeString("defaMuiTenDacPen1W", defaMuiTenDacPen1W)
+    '    wr.WriteAttributeString("defaMuiTenDacPen1C", defaMuiTenDacPen1C.ToArgb)
+    '    wr.WriteAttributeString("defaMuiTenDacPen2W", defaMuiTenDacPen2W)
+    '    wr.WriteAttributeString("defaMuiTenDacPen2C", defaMuiTenDacPen2C.ToArgb)
+    '    wr.WriteAttributeString("defaMuiTenDacFill", defaMuiTenDacFill.ToString)
+    '    wr.WriteAttributeString("defaMuiTenDacFillC", defaMuiTenDacFillC.ToArgb) 'Color.Red
 
-        wr.WriteAttributeString("defaTableColsNo", defaTableColsNo)
-        wr.WriteAttributeString("defaTableRowsNo", defaTableRowsNo)
-        wr.WriteAttributeString("defaTableBorderW", defaTableBorderW)
-        wr.WriteAttributeString("defaTableBorderC", defaTableBorderC.ToArgb)
-        wr.WriteAttributeString("defaTableLineW", defaTableLineW)
-        wr.WriteAttributeString("defaTableLineC", defaTableLineC.ToArgb)
-        wr.WriteAttributeString("defaTableFillC", defaTableFillC.ToArgb)
+    '    wr.WriteAttributeString("defaTableColsNo", defaTableColsNo)
+    '    wr.WriteAttributeString("defaTableRowsNo", defaTableRowsNo)
+    '    wr.WriteAttributeString("defaTableBorderW", defaTableBorderW)
+    '    wr.WriteAttributeString("defaTableBorderC", defaTableBorderC.ToArgb)
+    '    wr.WriteAttributeString("defaTableLineW", defaTableLineW)
+    '    wr.WriteAttributeString("defaTableLineC", defaTableLineC.ToArgb)
+    '    wr.WriteAttributeString("defaTableFillC", defaTableFillC.ToArgb)
 
-        'wr.WriteAttributeString("defaTableTFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
-        wr.WriteAttributeString("defaTableTFontName", defaTableTFontName)
-        wr.WriteAttributeString("defaTableTFontSize", defaTableTFontSize)
-        wr.WriteAttributeString("defaTableTFontStyle", defaTableTFontStyle)
-        wr.WriteAttributeString("defaTableTextC", defaTableTextC.ToArgb)
+    '    'wr.WriteAttributeString("defaTableTFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
+    '    wr.WriteAttributeString("defaTableTFontName", defaTableTFontName)
+    '    wr.WriteAttributeString("defaTableTFontSize", defaTableTFontSize)
+    '    wr.WriteAttributeString("defaTableTFontStyle", defaTableTFontStyle)
+    '    wr.WriteAttributeString("defaTableTextC", defaTableTextC.ToArgb)
 
-        'wr.WriteAttributeString("defaTextFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
-        wr.WriteAttributeString("defaTextFontName", defaTextFontName)
-        wr.WriteAttributeString("defaTextFontSize", defaTextFontSize)
-        wr.WriteAttributeString("defaTextFontStyle", defaTextFontStyle)
-        wr.WriteAttributeString("defaTextC", defaTextC.ToArgb)
+    '    'wr.WriteAttributeString("defaTextFont As Font = New Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point)
+    '    wr.WriteAttributeString("defaTextFontName", defaTextFontName)
+    '    wr.WriteAttributeString("defaTextFontSize", defaTextFontSize)
+    '    wr.WriteAttributeString("defaTextFontStyle", defaTextFontStyle)
+    '    wr.WriteAttributeString("defaTextC", defaTextC.ToArgb)
 
-        wr.WriteAttributeString("DanhDauColor", DanhDauColor.ToArgb)
-        wr.WriteAttributeString("DanhDauColor2", DanhDauColor2.ToArgb)
-        wr.WriteAttributeString("VeBoundColor", VeBoundColor.ToKnownColor) ' Color.FromKnownColor(KnownColor.HotTrack)
+    '    wr.WriteAttributeString("DanhDauColor", DanhDauColor.ToArgb)
+    '    wr.WriteAttributeString("DanhDauColor2", DanhDauColor2.ToArgb)
+    '    wr.WriteAttributeString("VeBoundColor", VeBoundColor.ToKnownColor) ' Color.FromKnownColor(KnownColor.HotTrack)
 
-        wr.WriteAttributeString("defaUndosNo", defaUndosNo)
+    '    wr.WriteAttributeString("defaUndosNo", defaUndosNo)
 
-        Dim strColors As String = myColor(0).ToArgb
-        For i As Integer = 1 To 31
-            strColors &= " " & myColor(i).ToArgb
-        Next
-        wr.WriteAttributeString("ColorsTable", strColors)
+    '    Dim strColors As String = myColor(0).ToArgb
+    '    For i As Integer = 1 To 31
+    '        strColors &= " " & myColor(i).ToArgb
+    '    Next
+    '    wr.WriteAttributeString("ColorsTable", strColors)
 
-        wr.WriteEndElement()
-    End Sub
+    '    wr.WriteEndElement()
+    'End Sub
 
     Public Function GetMauGoc(ByVal pColor As Color) As Color
         Dim MyDialog As New ColorDialog
@@ -641,4 +654,15 @@ Module modBanDo
         End If
     End Function
 
+    '-- New Version --
+    Public Function GetZoomLevel(ByVal pMap As AxMapXLib.AxMap, ByVal pTyLeBanDo As Integer) As Double
+        Return CDec(pTyLeBanDo) * pMap.MapPaperWidth * modBanDo.BDSaiSo / 100.0
+    End Function
+
+    '-- New Version --
+    Public Function GetTyLeBD(ByVal pMap As AxMapXLib.AxMap, ByVal pZoom As Double) As Integer
+        ' The following expression was wrapped in a checked-expression
+        ' The following expression was wrapped in a unchecked-expression
+        Return CInt(Math.Round(pMap.Zoom * 100.0 / (pMap.MapPaperWidth * modBanDo.BDSaiSo)))
+    End Function
 End Module

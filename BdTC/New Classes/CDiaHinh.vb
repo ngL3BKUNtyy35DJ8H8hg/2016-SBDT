@@ -159,52 +159,52 @@ Public Class CDiaHinh
         End Try
     End Sub
 
-    Private Sub Draw3(ByVal g As Graphics, ByVal pSymbol As CSymbol3)
-        Dim graphics As Graphics = Me.m_Map.CreateGraphics()
-        Dim container As GraphicsContainer = g.BeginContainer()
-        g.TranslateTransform(CSng(pSymbol.GocX), CSng(pSymbol.GocY))
-        g.RotateTransform(pSymbol.Heading)
-        Try
-            Dim enumerator As IEnumerator = pSymbol.GObjs.GetEnumerator()
-            While enumerator.MoveNext()
-                Dim graphicObject As GraphicObject = CType(enumerator.Current, GraphicObject)
-                Try
-                    If graphicObject.GetObjType() = OBJECTTYPE.Text Then
-                        Dim sizeF As SizeF = g.MeasureString((CType(graphicObject, TextGraphic)).Text, (CType(graphicObject, TextGraphic)).Font)
-                        Dim num As Single = graphics.MeasureString((CType(graphicObject, TextGraphic)).Text, (CType(graphicObject, TextGraphic)).Font).Width / sizeF.Width
-                        Dim font As Font = New Font((CType(graphicObject, TextGraphic)).Font.Name, (CType(graphicObject, TextGraphic)).Font.Size * num, (CType(graphicObject, TextGraphic)).Font.Style, (CType(graphicObject, TextGraphic)).Font.Unit)
-							(CType(graphicObject, TextGraphic)).Font = font
-                    End If
-                Catch expr_104 As Exception
-                    'ProjectData.SetProjectError(expr_104)
-                    'ProjectData.ClearProjectError()
-                End Try
-            End While
-        Finally
-            '       Dim enumerator As IEnumerator
-            '       If TypeOf enumerator Is IDisposable Then
-            '(TryCast(enumerator, IDisposable)).Dispose()
-            '       End If
-        End Try
-        pSymbol.GObjs.DrawObjects(g, CSng(pSymbol.Zoom))
-        g.EndContainer(container)
-    End Sub
+    'Private Sub Draw3(ByVal g As Graphics, ByVal pSymbol As CSymbol3)
+    '    Dim graphics As Graphics = Me.m_Map.CreateGraphics()
+    '    Dim container As GraphicsContainer = g.BeginContainer()
+    '    g.TranslateTransform(CSng(pSymbol.GocX), CSng(pSymbol.GocY))
+    '    g.RotateTransform(pSymbol.Heading)
+    '    Try
+    '        Dim enumerator As IEnumerator = pSymbol.GObjs.GetEnumerator()
+    '        While enumerator.MoveNext()
+    '            Dim graphicObject As GraphicObject = CType(enumerator.Current, GraphicObject)
+    '            Try
+    '                If graphicObject.GetObjType() = OBJECTTYPE.Text Then
+    '                    Dim sizeF As SizeF = g.MeasureString((CType(graphicObject, TextGraphic)).Text, (CType(graphicObject, TextGraphic)).Font)
+    '                    Dim num As Single = graphics.MeasureString((CType(graphicObject, TextGraphic)).Text, (CType(graphicObject, TextGraphic)).Font).Width / sizeF.Width
+    '                    Dim font As Font = New Font((CType(graphicObject, TextGraphic)).Font.Name, (CType(graphicObject, TextGraphic)).Font.Size * num, (CType(graphicObject, TextGraphic)).Font.Style, (CType(graphicObject, TextGraphic)).Font.Unit)
+    '			(CType(graphicObject, TextGraphic)).Font = font
+    '                End If
+    '            Catch expr_104 As Exception
+    '                'ProjectData.SetProjectError(expr_104)
+    '                'ProjectData.ClearProjectError()
+    '            End Try
+    '        End While
+    '    Finally
+    '        '       Dim enumerator As IEnumerator
+    '        '       If TypeOf enumerator Is IDisposable Then
+    '        '(TryCast(enumerator, IDisposable)).Dispose()
+    '        '       End If
+    '    End Try
+    '    pSymbol.GObjs.DrawObjects(g, CSng(pSymbol.Zoom))
+    '    g.EndContainer(container)
+    'End Sub
 
-    Private Sub DrawSymbol3(ByVal pbmpImage As Image)
-        Dim g As Graphics = Graphics.FromImage(pbmpImage)
-        Try
-            Dim enumerator As IEnumerator = Me.m_Symbol3Objs.GetEnumerator()
-            While enumerator.MoveNext()
-                Dim pSymbol As CSymbol3 = CType(enumerator.Current, CSymbol3)
-                Me.Draw3(g, pSymbol)
-            End While
-        Finally
-            '       Dim enumerator As IEnumerator
-            '       If TypeOf enumerator Is IDisposable Then
-            '(TryCast(enumerator, IDisposable)).Dispose()
-            '       End If
-        End Try
-    End Sub
+    'Private Sub DrawSymbol3(ByVal pbmpImage As Image)
+    '    Dim g As Graphics = Graphics.FromImage(pbmpImage)
+    '    Try
+    '        Dim enumerator As IEnumerator = Me.m_Symbol3Objs.GetEnumerator()
+    '        While enumerator.MoveNext()
+    '            Dim pSymbol As CSymbol3 = CType(enumerator.Current, CSymbol3)
+    '            Me.Draw3(g, pSymbol)
+    '        End While
+    '    Finally
+    '        '       Dim enumerator As IEnumerator
+    '        '       If TypeOf enumerator Is IDisposable Then
+    '        '(TryCast(enumerator, IDisposable)).Dispose()
+    '        '       End If
+    '    End Try
+    'End Sub
 
     ''' <summary>
     ''' '-- frmMain --
@@ -352,54 +352,54 @@ Public Class CDiaHinh
     ''' <returns></returns>
     ''' <remarks></remarks>
     Private Function GetTexObjStr(ByVal aSymbol As CSymbol3, ByVal mImageFile As String) As String
-        Dim strKQ As String = "<TexObj"
-        Dim mName As String
-        Dim mWidth As Integer
-        Dim mHeight As Integer
-        Dim mShiftX As Integer
-        Dim mShiftY As Integer
+        'Dim strKQ As String = "<TexObj"
+        'Dim mName As String
+        'Dim mWidth As Integer
+        'Dim mHeight As Integer
+        'Dim mShiftX As Integer
+        'Dim mShiftY As Integer
 
-        Dim rect As Rectangle
-        Dim mMinX As Integer
-        Dim mMinY As Integer
-        Dim mMaxX As Integer
-        Dim mMaxY As Integer
+        'Dim rect As Rectangle
+        'Dim mMinX As Integer
+        'Dim mMinY As Integer
+        'Dim mMaxX As Integer
+        'Dim mMaxY As Integer
 
-        rect = aSymbol.GetBounds()
-        mMinX = Math.Floor(CDbl(rect.X) / myPixelsPerGridX)
-        mMinY = Math.Floor(CDbl(rect.Y) / myPixelsPerGridY)
-        mMaxX = Math.Ceiling(CDbl(rect.X + rect.Width) / myPixelsPerGridX)
-        mMaxY = Math.Ceiling(CDbl(rect.Y + rect.Height) / myPixelsPerGridY)
+        'rect = aSymbol.GetBounds()
+        'mMinX = Math.Floor(CDbl(rect.X) / myPixelsPerGridX)
+        'mMinY = Math.Floor(CDbl(rect.Y) / myPixelsPerGridY)
+        'mMaxX = Math.Ceiling(CDbl(rect.X + rect.Width) / myPixelsPerGridX)
+        'mMaxY = Math.Ceiling(CDbl(rect.Y + rect.Height) / myPixelsPerGridY)
 
-        mName = aSymbol.Name
-        mWidth = mMaxX - mMinX
-        mHeight = mMaxY - mMinY
-        mShiftX = mMinX
-        mShiftY = myGRID_HEIGHT - 1 - mMaxY
+        'mName = aSymbol.Name
+        'mWidth = mMaxX - mMinX
+        'mHeight = mMaxY - mMinY
+        'mShiftX = mMinX
+        'mShiftY = myGRID_HEIGHT - 1 - mMaxY
 
-        Dim mSymbolRect As Rectangle = New Rectangle(mMinX * myPixelsPerGridX, mMinY * myPixelsPerGridY, (mMaxX - mMinX) * myPixelsPerGridX, (mMaxY - mMinY) * myPixelsPerGridY)
-        Dim mSymbolImage As Bitmap = New Bitmap(mSymbolRect.Width, mSymbolRect.Height)
+        'Dim mSymbolRect As Rectangle = New Rectangle(mMinX * myPixelsPerGridX, mMinY * myPixelsPerGridY, (mMaxX - mMinX) * myPixelsPerGridX, (mMaxY - mMinY) * myPixelsPerGridY)
+        'Dim mSymbolImage As Bitmap = New Bitmap(mSymbolRect.Width, mSymbolRect.Height)
 
-        aSymbol.GocX -= mSymbolRect.X
-        aSymbol.GocY -= mSymbolRect.Y
-        Dim g As Graphics = Graphics.FromImage(mSymbolImage)
-        g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias '.HighQuality
-        g.Clear(Color.White)
-        aSymbol.Draw(g)
-        g.Dispose()
+        'aSymbol.GocX -= mSymbolRect.X
+        'aSymbol.GocY -= mSymbolRect.Y
+        'Dim g As Graphics = Graphics.FromImage(mSymbolImage)
+        'g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias '.HighQuality
+        'g.Clear(Color.White)
+        'aSymbol.Draw(g)
+        'g.Dispose()
 
-        mSymbolImage.Save(mImageFile, Imaging.ImageFormat.Bmp)
+        'mSymbolImage.Save(mImageFile, Imaging.ImageFormat.Bmp)
 
-        strKQ &= " Name=""" & mName & """"
-        strKQ &= " ImageFile=""" & mImageFile & """"
-        strKQ &= " Width=""" & mWidth & """"
-        strKQ &= " Height=""" & mHeight & """"
-        strKQ &= " ShiftX=""" & mShiftX & """"
-        strKQ &= " ShiftY=""" & mShiftY & """"
-        strKQ &= " ImageWidth=""" + mSymbolRect.Width + """"
-        strKQ &= " ImageHeight=""" + mSymbolRect.Height + """"
-        strKQ &= " />"
-        Return strKQ
+        'strKQ &= " Name=""" & mName & """"
+        'strKQ &= " ImageFile=""" & mImageFile & """"
+        'strKQ &= " Width=""" & mWidth & """"
+        'strKQ &= " Height=""" & mHeight & """"
+        'strKQ &= " ShiftX=""" & mShiftX & """"
+        'strKQ &= " ShiftY=""" & mShiftY & """"
+        'strKQ &= " ImageWidth=""" + mSymbolRect.Width + """"
+        'strKQ &= " ImageHeight=""" + mSymbolRect.Height + """"
+        'strKQ &= " />"
+        'Return strKQ
     End Function
 
     ''' <summary>
@@ -429,50 +429,50 @@ Public Class CDiaHinh
         End If
     End Sub
 
-    Public Sub Hien3DSymbols()
-        Me.LoadSymbols()
-        Me.m_TexImage = New Bitmap(modSaBan.myTextureFile)
-        Me.DrawSymbol3(Me.m_TexImage)
-        MyBase.LoadMemStream(Me.m_TexImage)
-    End Sub
+    'Public Sub Hien3DSymbols()
+    '    Me.LoadSymbols()
+    '    Me.m_TexImage = New Bitmap(modSaBan.myTextureFile)
+    '    Me.DrawSymbol3(Me.m_TexImage)
+    '    MyBase.LoadMemStream(Me.m_TexImage)
+    'End Sub
 
-    Public Sub Xoa3DSymbols()
-        MyBase.ClearModels()
-        Me.m_TexImage = New Bitmap(modSaBan.myTextureFile)
-        MyBase.LoadMemStream(Me.m_TexImage)
-    End Sub
+    'Public Sub Xoa3DSymbols()
+    '    MyBase.ClearModels()
+    '    Me.m_TexImage = New Bitmap(modSaBan.myTextureFile)
+    '    MyBase.LoadMemStream(Me.m_TexImage)
+    'End Sub
 
-    Public Sub ShowSaBan()
-        If MyProject.Computer.FileSystem.DirectoryExists(modSaBan.mySaBanDir) Then
-            Dim text As String = modSaBan.mySaBanDir + "\" + modSaBan.MyMnuName
-            If MyProject.Computer.FileSystem.FileExists(text) Then
-                Dim dlg3DShow As Dlg3DShow = New Dlg3DShow()
-                Dim bitmap As Bitmap = New Bitmap(modSaBan.mySaBanDir + "\DienTapMap.jpg")
-                Dim cameraPos As Vector3 = Me.cameraPos
-                Dim cameraTarget As Vector3 = Me.cameraTarget
-                Dim angleZ As Single = MyBase.GetAngleZ()
-                Dim angleX As Single = MyBase.GetAngleX()
-                dlg3DShow.ShowDialog(bitmap, Me.heightData, cameraPos, cameraTarget, text, modSaBan.myLightDir, angleZ, angleX)
-                bitmap.Dispose()
-                dlg3DShow.Dispose()
-            Else
-                Interaction.MsgBox("Không th" & ChrW(7845) & "y file: " + text, MsgBoxStyle.OkOnly, Nothing)
-            End If
-        Else
-            Interaction.MsgBox("Không th" & ChrW(7845) & "y th" & ChrW(432) & " m" & ChrW(7909) & "c: " + modSaBan.mySaBanDir, MsgBoxStyle.OkOnly, Nothing)
-        End If
-    End Sub
+    'Public Sub ShowSaBan()
+    '    If MyProject.Computer.FileSystem.DirectoryExists(modSaBan.mySaBanDir) Then
+    '        Dim text As String = modSaBan.mySaBanDir + "\" + modSaBan.MyMnuName
+    '        If MyProject.Computer.FileSystem.FileExists(text) Then
+    '            Dim dlg3DShow As Dlg3DShow = New Dlg3DShow()
+    '            Dim bitmap As Bitmap = New Bitmap(modSaBan.mySaBanDir + "\DienTapMap.jpg")
+    '            Dim cameraPos As Vector3 = Me.cameraPos
+    '            Dim cameraTarget As Vector3 = Me.cameraTarget
+    '            Dim angleZ As Single = MyBase.GetAngleZ()
+    '            Dim angleX As Single = MyBase.GetAngleX()
+    '            dlg3DShow.ShowDialog(bitmap, Me.heightData, cameraPos, cameraTarget, text, modSaBan.myLightDir, angleZ, angleX)
+    '            bitmap.Dispose()
+    '            dlg3DShow.Dispose()
+    '        Else
+    '            Interaction.MsgBox("Không th" & ChrW(7845) & "y file: " + text, MsgBoxStyle.OkOnly, Nothing)
+    '        End If
+    '    Else
+    '        Interaction.MsgBox("Không th" & ChrW(7845) & "y th" & ChrW(432) & " m" & ChrW(7909) & "c: " + modSaBan.mySaBanDir, MsgBoxStyle.OkOnly, Nothing)
+    '    End If
+    'End Sub
 
-    Public Sub ScriptsEdit()
-        If MyProject.Computer.FileSystem.DirectoryExists(modSaBan.mySaBanDir) Then
-            Dim text As String = modSaBan.mySaBanDir + "\" + modSaBan.MyMnuName
-            If MyProject.Computer.FileSystem.FileExists(text) Then
-					New dlgActions() With { .TopMost = True }.Show(text, myModule.fMain)
-            Else
-                Interaction.MsgBox("Không th" & ChrW(7845) & "y file: " + text, MsgBoxStyle.OkOnly, Nothing)
-            End If
-        Else
-            Interaction.MsgBox("Không th" & ChrW(7845) & "y th" & ChrW(432) & " m" & ChrW(7909) & "c: " + modSaBan.mySaBanDir, MsgBoxStyle.OkOnly, Nothing)
-        End If
-    End Sub
+    'Public Sub ScriptsEdit()
+    '    If MyProject.Computer.FileSystem.DirectoryExists(modSaBan.mySaBanDir) Then
+    '        Dim text As String = modSaBan.mySaBanDir + "\" + modSaBan.MyMnuName
+    '        If MyProject.Computer.FileSystem.FileExists(text) Then
+    '	New dlgActions() With { .TopMost = True }.Show(text, myModule.fMain)
+    '        Else
+    '            Interaction.MsgBox("Không th" & ChrW(7845) & "y file: " + text, MsgBoxStyle.OkOnly, Nothing)
+    '        End If
+    '    Else
+    '        Interaction.MsgBox("Không th" & ChrW(7845) & "y th" & ChrW(432) & " m" & ChrW(7909) & "c: " + modSaBan.mySaBanDir, MsgBoxStyle.OkOnly, Nothing)
+    '    End If
+    'End Sub
 End Class

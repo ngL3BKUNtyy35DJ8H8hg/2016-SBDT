@@ -855,6 +855,21 @@ Public Class CSymbol
         m_Blinking = False
     End Sub
 
+    Public Sub New(ByVal pDesc As String, ByVal pBlinking As Boolean, ByVal pZoom As Double, ByVal pMWidth As Single, ByVal pGocX As Double, ByVal pGocY As Double, ByVal pGObjs As CGraphicObjs)
+        Me.New()
+        m_GocX = pGocX
+        m_GocY = pGocY
+        m_Zoom = pZoom
+        m_MWidth = pMWidth
+        'm_GObjs = pGObjs
+        m_GObjs = New CGraphicObjs
+        For Each aGObj As GraphicObject In pGObjs
+            m_GObjs.Add(aGObj.Clone)
+        Next
+        m_Description = pDesc
+        m_Blinking = pBlinking
+    End Sub
+
     Public Sub New(ByVal pDesc As String, ByVal pBlinking As Boolean, ByVal pZoom As Double, ByVal pMWidth As Single, ByVal pGocX As Double, ByVal pGocY As Double, ByVal pGObjs As CGraphicObjs, ByVal pHeading As Single)
         Me.New()
         m_GocX = pGocX

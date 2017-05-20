@@ -8,17 +8,45 @@ Imports mySaBanLib
 Imports Microsoft.DirectX
 Imports Microsoft.DirectX.Direct3D
 Imports BdTC.Actions
+Imports MapXLib
 
 Public Class frmMain
     Private myPixelsPerGridX As Double
     Private myPixelsPerGridY As Double
 
     'Private myDiaHinh As CTerrain
-    Public myTerrain As CDiaHinh
+
 
     Private m_TexImage As Bitmap
 
     Private heightData(,) As Single
+
+
+
+
+    '=====================================
+    '-- New Version --
+
+    Private m_bNewBdTC As Boolean
+
+    'Public myVeActs As SaBan.CVeActs
+
+    Public myTerrain As CDiaHinh
+
+    'Public myBanDoNen As CBanDoNen
+
+    Public bBanDo2Loaded As Boolean
+
+    Private myPages As SaBan.CPages
+
+    Private CurrPage As SaBan.CPage
+
+    Private bLoaded As Boolean
+
+    Public myDirty As Boolean
+
+    Public lyrCacKyHieu As Layer
+    '=====================================
 
     Private Sub LoadHeightData(ByVal fileName As String)
         ReDim heightData(myGRID_WIDTH - 1, myGRID_HEIGHT - 1)
@@ -49,9 +77,9 @@ Public Class frmMain
     Friend mySlides As CSlides
     Private CurrSlide As CSlide
 
-    Private bLoaded As Boolean = False
+    'Private bLoaded As Boolean = False
 
-    Public myDirty As Boolean = False
+    'Public myDirty As Boolean = False
 
     Private Sub PopulateList()
         Me.lvPages.Clear()
@@ -213,14 +241,30 @@ Public Class frmMain
         Me.ToolStripStatusLabel3.Text = ""
     End Sub
 
+    ' -- New Version --
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-
-        'myDiaHinh = Nothing
-
-        'myBando.StopBlinking()
-        myBando.Dispose()
-
-        fMain = Nothing
+        If Me.bLoaded Then
+            Me.LuuThayDoi()
+            Try
+                modSaBan.DienTap2File(modSaBan.myLastSaBan)
+            Catch expr_1A As Exception
+                'ProjectData.SetProjectError(expr_1A)
+                'ProjectData.ClearProjectError()
+            End Try
+        End If
+        Try
+            Me.myBando.Dispose()
+        Catch expr_35 As Exception
+            'ProjectData.SetProjectError(expr_35)
+            'ProjectData.ClearProjectError()
+        End Try
+        Try
+            Me.myTerrain.Dispose()
+        Catch expr_50 As Exception
+            'ProjectData.SetProjectError(expr_50)
+            'ProjectData.ClearProjectError()
+        End Try
+        myModule.fMain = Nothing
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -244,7 +288,7 @@ Public Class frmMain
         '-- modBanDo --
         'myDefaFileName = My.Settings.myDefaFileName
 
-        LoadDefa(myDefaFileName)
+        modBdTC.LoadDefa(myDefaFileName)
 
         myHienDanhSach = My.Settings.myHienDanhSach
 
@@ -303,7 +347,7 @@ Public Class frmMain
         LastBdTC = myNewBdTC '"New.bdtc"
         Me.Text = "Bản đồ tác chiến (" & LastBdTC & ")"
 
-        InitTerrain()
+        'InitTerrain()
 
         bLoaded = True
     End Sub
@@ -1333,7 +1377,7 @@ Public Class frmMain
             End If
             If (Me.AxMap1.CenterX <> m_LastMapCX) Or (Me.AxMap1.CenterY <> m_LastMapCY) Then
                 'myDiaHinh.ChangeFocus(Me.AxMap1.CenterX, Me.AxMap1.CenterY)
-                ChangeDHFocus(Me.AxMap1.CenterX, Me.AxMap1.CenterY)
+                'ChangeDHFocus(Me.AxMap1.CenterX, Me.AxMap1.CenterY)
             End If
         End If
 
@@ -1356,9 +1400,13 @@ Public Class frmMain
     'End Sub
 
     Public Sub New()
-
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
+
+        Me.myTerrain = Nothing
+        Me.myPages = New SaBan.CPages()
+        Me.bLoaded = False
+        Me.myDirty = False
 
         ' Add any initialization after the InitializeComponent() call.
         intMonitorW = My.Computer.Screen.WorkingArea.Width
@@ -1368,11 +1416,11 @@ Public Class frmMain
     End Sub
 
     Private Sub DrawSymbolToolStripButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles DrawSymbolToolStripButton.Click
-        HienKyHieu()
+        'HienKyHieu()
     End Sub
 
     Private Sub HideSymbolToolStripButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles HideSymbolToolStripButton.Click
-        XoaKyHieu()
+        'XoaKyHieu()
     End Sub
 
     Private Sub PhanLoaiKyHieuToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PhanLoaiKyHieuToolStripMenuItem.Click
@@ -1468,40 +1516,40 @@ Public Class frmMain
     '    myDiaHinh.LoadBillboardMeshs("D3DBillboardMesh.xml")
     'End Sub
 
-    Private Sub HienKyHieu()
-        LoadSymbols()
+    'Private Sub HienKyHieu()
+    '    LoadSymbols()
 
-        m_TexImage = New Bitmap(myTextureFile)
-        DrawSymbol(m_TexImage)
-        'Me.ExportSymbols()
-        myDiaHinh.LoadMemStream(m_TexImage)
+    '    m_TexImage = New Bitmap(myTextureFile)
+    '    DrawSymbol(m_TexImage)
+    '    'Me.ExportSymbols()
+    '    myDiaHinh.LoadMemStream(m_TexImage)
 
-        'myDiaHinh.OnDeviceReset(Nothing, Nothing)
-    End Sub
+    '    'myDiaHinh.OnDeviceReset(Nothing, Nothing)
+    'End Sub
 
-    Public Sub XoaKyHieu()
-        Me.myDiaHinh.ClearModels()
+    'Public Sub XoaKyHieu()
+    '    Me.myDiaHinh.ClearModels()
 
-        m_TexImage = New Bitmap(myTextureFile)
-        myDiaHinh.LoadMemStream(m_TexImage)
+    '    m_TexImage = New Bitmap(myTextureFile)
+    '    myDiaHinh.LoadMemStream(m_TexImage)
 
-        'myDiaHinh.OnDeviceReset(Nothing, Nothing)
-    End Sub
+    '    'myDiaHinh.OnDeviceReset(Nothing, Nothing)
+    'End Sub
 
-    Public Function GetSymbolType(ByVal pSymbol As CSymbol) As String
-        Dim Kq As String = "TexObj"
-        Dim mIndex As Integer
-        mIndex = myDiaHinh.GetModelMeshIndex(pSymbol.Description)
-        If mIndex > -1 Then
-            Kq = "Model"
-        Else
-            mIndex = myDiaHinh.GetBillboardMeshIndex(pSymbol.Description)
-            If mIndex > -1 Then
-                Kq = "Billboard"
-            End If
-        End If
-        Return Kq
-    End Function
+    'Public Function GetSymbolType(ByVal pSymbol As CSymbol) As String
+    '    Dim Kq As String = "TexObj"
+    '    Dim mIndex As Integer
+    '    mIndex = myDiaHinh.GetModelMeshIndex(pSymbol.Description)
+    '    If mIndex > -1 Then
+    '        Kq = "Model"
+    '    Else
+    '        mIndex = myDiaHinh.GetBillboardMeshIndex(pSymbol.Description)
+    '        If mIndex > -1 Then
+    '            Kq = "Billboard"
+    '        End If
+    '    End If
+    '    Return Kq
+    'End Function
 
     '''' <summary>
     '''' '-- CDiaHinh.vb --
@@ -1552,7 +1600,7 @@ Public Class frmMain
 
     Private Sub DrawSymbol(ByVal bmpImage As Image)
         Dim g As Graphics = Graphics.FromImage(bmpImage)
-        For Each aSymbol As CSymbol3 In m_Symbol3Objs
+        For Each aSymbol As XuLyKHLib.CSymbol3 In m_Symbol3Objs
             aSymbol.Draw(g)
             'Dim rect As Rectangle = aSymbol.GetBounds()
             'g.DrawRectangle(New Pen(Color.Black), rect)
@@ -1763,29 +1811,29 @@ Public Class frmMain
 
 
     Private Sub XemToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles XemToolStripMenuItem.Click
-        'myBando.StopBlinking()
-        Dim fileReader As String = My.Computer.FileSystem.ReadAllText(mySaBanDefFileName)
-        If fileReader.Length > 0 Then
-            mySaBanDir = fileReader
-        End If
-        'Dim MyName As String = Dir(mySaBanDir, vbDirectory)
-        'If MyName = mySaBanDir Then
+        ''myBando.StopBlinking()
+        'Dim fileReader As String = My.Computer.FileSystem.ReadAllText(mySaBanDefFileName)
+        'If fileReader.Length > 0 Then
+        '    mySaBanDir = fileReader
+        'End If
+        ''Dim MyName As String = Dir(mySaBanDir, vbDirectory)
+        ''If MyName = mySaBanDir Then
 
-        If My.Computer.FileSystem.DirectoryExists(mySaBanDir) Then
-            If My.Computer.FileSystem.FileExists(mySaBanDir & "\MyMenu.xml") Then
-                Dim f = New Dlg3DShow
-                Dim mTexImage As Bitmap = New Bitmap(mySaBanDir & "\DienTapMap.jpg")
+        'If My.Computer.FileSystem.DirectoryExists(mySaBanDir) Then
+        '    If My.Computer.FileSystem.FileExists(mySaBanDir & "\MyMenu.xml") Then
+        '        Dim f = New Dlg3DShow
+        '        Dim mTexImage As Bitmap = New Bitmap(mySaBanDir & "\DienTapMap.jpg")
 
-                f.ShowDialog(mTexImage, heightData, myDiaHinh.cameraPos * 1.4, myDiaHinh.cameraTarget * 1.4, mySaBanDir & "\MyMenu.xml")
-                mTexImage.Dispose()
-                f.Dispose()
-            Else
-                MsgBox("Không thấy file: " & mySaBanDir & "\MyMenu.xml")
-            End If
-        Else
-            MsgBox("Không thấy thư mục: " & mySaBanDir)
-        End If
-        'myBando.StartBlinking()
+        '        f.ShowDialog(mTexImage, heightData, myDiaHinh.cameraPos * 1.4, myDiaHinh.cameraTarget * 1.4, mySaBanDir & "\MyMenu.xml")
+        '        mTexImage.Dispose()
+        '        f.Dispose()
+        '    Else
+        '        MsgBox("Không thấy file: " & mySaBanDir & "\MyMenu.xml")
+        '    End If
+        'Else
+        '    MsgBox("Không thấy thư mục: " & mySaBanDir)
+        'End If
+        ''myBando.StartBlinking()
     End Sub
 
     '''' <summary>
@@ -1898,14 +1946,14 @@ Public Class frmMain
                         Me.bLoaded = Me.LoadPara2(modSaBan.myDiaHinhDef)
                     End If
                     If Not Me.bLoaded Then
-                        ProjectData.EndApp()
+                        'ProjectData.EndApp()
                     End If
                 End If
             End If
         End If
     End Sub
 
-    Public myTerrain As CDiaHinh
+    '-- New Version --
     Private Function LoadPara2(ByVal pDefFile As String) As Boolean
         Dim result As Boolean = False
         If modSaBan.LoadPara(pDefFile) Then
@@ -1921,21 +1969,182 @@ Public Class frmMain
                 Me.myTerrain.InitDiaHinh(modSaBan.myCamPos)
                 result = True
             Catch expr_74 As Exception
-                ProjectData.SetProjectError(expr_74)
-                ProjectData.ClearProjectError()
+                'ProjectData.SetProjectError(expr_74)
+                'ProjectData.ClearProjectError()
             End Try
         End If
         Return result
     End Function
 
+    '-- New Version --
+    Public Function initBanDo(ByVal pMap As AxMapXLib.AxMap) As Layer
+        Dim result As MapXLib.Layer
+        Try
+            pMap.GeoSet = modBanDo.myMapGst
+            pMap.Title.Visible = False
+            pMap.MapUnit = MapUnitConstants.miUnitMeter
+            Dim displayCoordSys As CoordSys = pMap.DisplayCoordSys
+            pMap.NumericCoordSys = displayCoordSys
+            pMap.InfotipSupport = False
+            pMap.NumericCoordSys.[Set](CType(modBanDo.myCoordSysType, CoordSysTypeConstants), displayCoordSys.Datum, pMap.NumericCoordSys.Units, pMap.NumericCoordSys.OriginLongitude, pMap.NumericCoordSys.OriginLatitude, pMap.NumericCoordSys.StandardParallelOne, pMap.NumericCoordSys.StandardParallelTwo, pMap.NumericCoordSys.Azimuth, pMap.NumericCoordSys.ScaleFactor, pMap.NumericCoordSys.FalseEasting, pMap.NumericCoordSys.FalseNorthing, pMap.NumericCoordSys.Range, , )
+            pMap.PaperUnit = PaperUnitConstants.miPaperUnitCentimeter
+            result = pMap.Layers.AddUserDrawLayer("LopVeKyHieu", 1S)
+        Catch expr_110 As Exception
+            'ProjectData.SetProjectError(expr_110)
+            'result = Nothing
+            'ProjectData.ClearProjectError()
+        End Try
+        Return result
+    End Function
+
+
+    '-- New Version --
+    Private Sub Init2DMap()
+        modBdTC.LoadDefa(modBdTC.myDefaFileName)
+        Me.lyrCacKyHieu = Me.initBanDo(Me.AxMap1)
+        'Me.myBanDoNen = New CBanDoNen(Me.AxMap1, Me, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel1)
+        Me.bBanDo2Loaded = False
+        'Me.myBando = New CBdTC(Me.AxMap1, Me, Me.Panel2DMap, Me.ToolStrip1)
+        myBando = New CBanDo(Me.AxMap1, Me, Me.Panel2DMap)
+        'Me.myVeActs = New CVeActs(Me.AxMap1, Me)
+        Me.OpenBdTC(modSaBan.LastBdTC)
+        Me.UpdateTitle()
+    End Sub
+
+    '-- New Version --
+    Private Sub OpenBdTC(ByVal mFileName As String)
+        If mFileName.Length > 0 Then
+            Me.LuuThayDoi()
+            If Me.LoadPages(mFileName) Then
+                Me.RefreshBdTC(0)
+                If modBanDo.BDTyLeBanDo = 0 Then
+                    modBanDo.BDTyLeBanDo = modBanDo.GetTyLeBD(Me.AxMap1, Me.AxMap1.Zoom)
+                    modBanDo.BDKinhDo = Me.AxMap1.CenterX
+                    modBanDo.BDViDo = Me.AxMap1.CenterY
+                End If
+                Me.m_bNewBdTC = True
+                Me.myDirty = False
+                modSaBan.LastBdTC = mFileName
+                Me.UpdateTitle()
+            End If
+        End If
+    End Sub
+
+    '-- New Version --
+    Private Sub PopulatePageList()
+        Me.lvPages.Clear()
+        Try
+            Dim enumerator As IEnumerator = Me.myPages.GetEnumerator()
+            While enumerator.MoveNext()
+                Dim cPage As SaBan.CPage = CType(enumerator.Current, SaBan.CPage)
+                Dim value As String = cPage.Value
+                Dim tag As String = cPage.ID.ToString()
+                Dim listViewItem As ListViewItem = New ListViewItem(value)
+                listViewItem.Tag = tag
+                listViewItem.ImageIndex = 0
+                listViewItem.StateImageIndex = 0
+                listViewItem.Checked = cPage.Checked
+                Me.lvPages.Items.Add(listViewItem)
+            End While
+        Finally
+            '       Dim enumerator As IEnumerator
+            '       If TypeOf enumerator Is IDisposable Then
+            '(TryCast(enumerator, IDisposable)).Dispose()
+            '       End If
+        End Try
+    End Sub
+
+    '-- New Version --
+    Private Sub PopulateSelePage()
+        Try
+            If Me.lvPages.SelectedItems.Count > 0 Then
+                Dim listViewItem As ListViewItem = Me.lvPages.SelectedItems(0)
+                If listViewItem IsNot Nothing Then
+                    Dim pId As Integer = Integer.Parse(listViewItem.Tag)
+                    Me.CurrPage = Me.myPages.GetItemByID(pId)
+                    If Not Information.IsNothing(Me.CurrPage) Then
+                        Me.myBando.KHsFromString(Me.CurrPage.Symbols)
+                    Else
+                        Me.myBando.KHsFromString("")
+                    End If
+                End If
+            Else
+                Me.myBando.KHsFromString("")
+            End If
+            Me.myBando.HideDrawTools()
+            Dim zoomLevel As Double = modBanDo.GetZoomLevel(Me.AxMap1, modBanDo.BDTyLeBanDo)
+            If zoomLevel > 0.0 Then
+                Me.AxMap1.ZoomTo(zoomLevel, modBanDo.BDKinhDo, modBanDo.BDViDo)
+            End If
+            Me.AxMap1.Refresh()
+            Me.PopulateListKH(Nothing)
+        Catch expr_E1 As Exception
+            'ProjectData.SetProjectError(expr_E1)
+            Dim ex As Exception = expr_E1
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "PopulateSelePage Error")
+            'ProjectData.ClearProjectError()
+        End Try
+    End Sub
+
+    '-- New Version --
+    Private Sub RefreshBdTC(ByVal iPage As Integer)
+        Try
+            Me.PopulatePageList()
+            If Me.lvPages.Items.Count > 0 Then
+                Me.lvPages.Items(iPage).Selected = True
+            End If
+            Me.PopulateSelePage()
+        Catch expr_38 As Exception
+            'ProjectData.SetProjectError(expr_38)
+            'ProjectData.ClearProjectError()
+        End Try
+    End Sub
+
+    '-- New Version --
+    Private Function LoadPages(ByVal pFileName As String) As Boolean
+        Dim result As Boolean = False
+        Dim streamReader As StreamReader = Nothing
+        Try
+            streamReader = File.OpenText(pFileName)
+            Dim text As String = streamReader.ReadToEnd()
+            If text.IndexOf(";&#xD;&#xA;") > -1 Then
+                text = text.Replace(";&#xD;&#xA;", ";")
+            End If
+            result = Me.myPages.LoadFromStr(text)
+        Catch expr_46 As Exception
+            'ProjectData.SetProjectError(expr_46)
+            'Dim ex As Exception = expr_46
+            'Interaction.MsgBox("File could not be opened or read." & vbCrLf & "Please verify that the filename is correct, and that you have read permissions for the desired directory." & vbCrLf & vbCrLf & "Exception: " + ex.Message, MsgBoxStyle.OkOnly, Nothing)
+            'ProjectData.ClearProjectError()
+        Finally
+            If streamReader IsNot Nothing Then
+                streamReader.Close()
+            End If
+        End Try
+        Return result
+    End Function
+
+    '-- New Version --
+    Private Sub UpdateTitle()
+        Me.Text = String.Concat(New String() {"Sa bàn:(", modSaBan.myDiaHinhDef, ") -  B" & ChrW(273) & "TC:(", modSaBan.LastBdTC, ")"})
+    End Sub
+
+    '-- New Version --
+    Private Sub LuuThayDoi()
+        If Me.myDirty AndAlso MessageBox.Show("Có thay " & ChrW(273) & ChrW(7893) & "i, l" & ChrW(432) & "u B" & ChrW(273) & "TC?", "L" & ChrW(432) & "u B" & ChrW(273) & "TC", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Me.SaveToolStripMenuItem_Click(Nothing, Nothing)
+        End If
+    End Sub
+
+    '-- New Version --
     Private Sub ClearBanDo()
         Me.LuuThayDoi()
         Try
             Me.myPages.Clear()
             Me.AxMap1.Layers.RemoveAll()
         Catch expr_23 As Exception
-            ProjectData.SetProjectError(expr_23)
-            ProjectData.ClearProjectError()
+            'ProjectData.SetProjectError(expr_23)
+            'ProjectData.ClearProjectError()
         End Try
     End Sub
 #End Region

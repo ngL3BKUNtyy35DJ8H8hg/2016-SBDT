@@ -10,10 +10,9 @@ Imports System.Xml
 Imports BdTC.Actions
 
 
-Module modSaBan
+Public Module modSaBan
     Public MyMnuName As String = "MyMnu.xml"
 
-    '-- modSaBan --
     Public myHienDanhSach As Boolean = True
 
     Public fActions As dlgActions
@@ -70,11 +69,7 @@ Module modSaBan
     Public mySpriteTexsFile As String = "..\MeshDef\D3DSpriteTexs.xml"
 
     Public myLastSaBan As String = "ThucHanh3.last"
-
-    '-- modBanDo --
     Public mySaBanDir As String = "ThucHanh3"
-
-    '-- modBanDo --
     Public LastBdTC As String = "ThucHanh3\ThucHanhCD.BDTC"
 
     '-- modBanDo --
@@ -111,7 +106,7 @@ Module modSaBan
     Public mySurf2X As Double = 2047D
     Public mySurf2Y As Double = 2405D
 
-    Public my3DSoPixelsPer1000m As Double = 312
+    Public my3DSoPixelsPer1000m As Double = 312.0
 
     Public Const RadsToDegs As Double = 57.29578
 
@@ -119,25 +114,24 @@ Module modSaBan
 
     Public heightData As Single(,)
 
-    'Public Function getDPGstr(ByVal pX As Double) As String
-    '    Dim dPG As DPGFormat = modSaBan.getDPG(pX)
-    '    Return String.Concat(New String() {dPG.ido.ToString("#0"), "°", dPG.iphut.ToString("#0"), ":", dPG.igiay.ToString("#0")})
-    'End Function
+    Public Function getDPGstr(ByVal pX As Double) As String
+        Dim dPG As DPGFormat = modSaBan.getDPG(pX)
+        Return String.Concat(New String() {dPG.ido.ToString("#0"), "°", dPG.iphut.ToString("#0"), ":", dPG.igiay.ToString("#0")})
+    End Function
 
-    'Public Function getDPG(ByVal pX As Double) As DPGFormat
-    '    Dim result As DPGFormat = Nothing
-    '    ' The following expression was wrapped in a checked-statement
-    '    result.ido = CInt(Math.Round(Math.Floor(pX)))
-    '    result.iphut = CInt(Math.Round(Math.Floor((pX - CDec(result.ido)) * 60.0)))
-    '    result.igiay = CInt(Math.Round(Math.Floor(((pX - CDec(result.ido)) * 60.0 - CDec(result.iphut)) * 60.0)))
-    '    Return result
-    'End Function
+    Public Function getDPG(ByVal pX As Double) As DPGFormat
+        Dim result As DPGFormat = Nothing
+        ' The following expression was wrapped in a checked-statement
+        result.ido = CInt(Math.Round(Math.Floor(pX)))
+        result.iphut = CInt(Math.Round(Math.Floor((pX - CDec(result.ido)) * 60.0)))
+        result.igiay = CInt(Math.Round(Math.Floor(((pX - CDec(result.ido)) * 60.0 - CDec(result.iphut)) * 60.0)))
+        Return result
+    End Function
 
-    '-- modBanDo --
     Public Function GetSurfPosition(ByVal pMapX As Double, ByVal pMapY As Double) As PointF
         Dim result As PointF = New PointF(0.0F, 0.0F)
         Dim num As Double
-        If modSaBan.myGridDataType = "xyz" Then
+        If Operators.CompareString(modSaBan.myGridDataType, "xyz", False) = 0 Then
             num = (pMapX - modSaBan.myMap2X) * (modSaBan.mySurf2X - modSaBan.mySurf1X) / (modSaBan.myMap1X - modSaBan.myMap2X)
         Else
             num = (modSaBan.myMap1X - pMapX) * (modSaBan.mySurf2X - modSaBan.mySurf1X) / (modSaBan.myMap1X - modSaBan.myMap2X) + modSaBan.mySurf1X
@@ -174,10 +168,10 @@ Module modSaBan
                     End If
                 End While
             Finally
-                '          Dim enumerator As IEnumerator
-                '          If TypeOf enumerator Is IDisposable Then
-                '(TryCast(enumerator, IDisposable)).Dispose()
-                '          End If
+                Dim enumerator As IEnumerator
+                If TypeOf enumerator Is IDisposable Then
+						(TryCast(enumerator, IDisposable)).Dispose()
+                End If
             End Try
         End If
         Return result
@@ -625,8 +619,7 @@ Module modSaBan
         ' The following expression was wrapped in a checked-statement
         modSaBan.myGRID_WIDTH += 1
         modSaBan.myGRID_HEIGHT += 1
-        'modSaBan.heightData = New Single(modSaBan.myGRID_WIDTH - 1 + 1 - 1, modSaBan.myGRID_HEIGHT - 1 + 1 - 1) {}
-        modSaBan.heightData = New Single(modSaBan.myGRID_WIDTH, modSaBan.myGRID_HEIGHT) {}
+        modSaBan.heightData = New Single(modSaBan.myGRID_WIDTH - 1 + 1 - 1, modSaBan.myGRID_HEIGHT - 1 + 1 - 1) {}
         Dim arg_3D_0 As Integer = 0
         Dim num As Integer = modSaBan.myGRID_WIDTH - 1
         For i As Integer = arg_3D_0 To num
@@ -652,16 +645,16 @@ Module modSaBan
             End If
             Dim array As String() = text.Split(New Char() {","c})
             If array.GetLength(0) = 3 Then
-                Dim val1 As Double = modBdTC.GetDouble(array(0))
-                Dim val2 As Double = modBdTC.GetDouble(array(1))
-                If val1 >= modSaBan.myMap2X And val1 <= modSaBan.myMap1X And val2 >= modSaBan.myMap2Y And val2 <= modSaBan.myMap1Y Then
+                Dim [double] As Double = modBdTC.GetDouble(array(0))
+                Dim double2 As Double = modBdTC.GetDouble(array(1))
+                If [double] >= modSaBan.myMap2X And [double] <= modSaBan.myMap1X And double2 >= modSaBan.myMap2Y And double2 <= modSaBan.myMap1Y Then
                     ' The following expression was wrapped in a unchecked-expression
-                    Dim num2 As Integer = CInt(Math.Round((val1 - modSaBan.myMap2X) / num))
+                    Dim num2 As Integer = CInt(Math.Round([double] - modSaBan.myMap2X / num))
                     ' The following expression was wrapped in a unchecked-expression
-                    Dim num3 As Integer = CInt(Math.Round((val2 - modSaBan.myMap2Y) / num))
-                    Dim val3 As Single = modBdTC.GetSingle(array(2))
+                    Dim num3 As Integer = CInt(Math.Round(double2 - modSaBan.myMap2Y / num))
+                    Dim [single] As Single = modBdTC.GetSingle(array(2))
                     If num2 < modSaBan.myGRID_WIDTH And num3 < modSaBan.myGRID_HEIGHT Then
-                        modSaBan.heightData(num2, num3) = val3
+                        modSaBan.heightData(num2, num3) = [single]
                     End If
                 End If
             End If

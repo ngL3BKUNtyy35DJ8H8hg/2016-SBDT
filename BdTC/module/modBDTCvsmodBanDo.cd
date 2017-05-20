@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Module Name="BdTC.SaBan.modBdTC">
+    <Position X="3.25" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <FileName>module\modBdTC.vb</FileName>
+      <HashCode>ASEChJglAIgAggBYAgkyaY4DScyiABJOJASBgDiQCiA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="BdTC.modBanDo">
+    <Position X="0.5" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>modBanDo.vb</FileName>
+      <HashCode>hTEahJg1VKwAxgVYAgsy/Y4HScyiEBJONISBhLiQQKA=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Struct Name="BdTC.modBanDo.UNDOITEM" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>modBanDo.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="BdTC.modBanDo.INTERSECTNODE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>modBanDo.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="BdTC.modBanDo.EDITNODE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>modBanDo.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+  </Module>
+</ClassDiagram>

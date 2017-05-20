@@ -776,7 +776,7 @@ Public Class CBanDo
         m_ParentForm.ChangeDesc(pSymbol, txtKQ.Parent)
 
         txtKQ.Text = pSymbol.Description
-        txtObjType.Text = m_ParentForm.GetSymbolType(pSymbol)
+        'txtObjType.Text = m_ParentForm.GetSymbolType(pSymbol)
 
         m_ParentForm.ToolStripStatusLabel3.Text = ""
         m_Map.CurrentTool = MapXLib.ToolConstants.miArrowTool
@@ -4762,5 +4762,27 @@ Err_NhapNhay:
     Private Sub MnuPartSendFront_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuPartSendFront.Click
         FoundObject.FoundSymbol.GObjs.SendFront(FoundObject.FoundObject)
         m_Map.CenterX = m_Map.CenterX
+    End Sub
+
+    Public Sub HideDrawTools()
+        If Not Information.IsNothing(modBdTC.fCacKyHieu) Then
+            Try
+                modBdTC.fCacKyHieu.Close()
+            Catch expr_18 As Exception
+                'ProjectData.SetProjectError(expr_18)
+                'ProjectData.ClearProjectError()
+            End Try
+        End If
+        'Dim num As Integer = Me.m_ToolStrip.Items.IndexOf(Me.m_ParentForm.CNToolStripButton)
+        'Dim arg_58_0 As Integer = num + 1
+        'Dim num2 As Integer = Me.m_ToolStrip.Items.Count - 1
+        'For i As Integer = arg_58_0 To num2
+        '    Me.m_ToolStrip.Items(i).Enabled = False
+        'Next
+        'Me.m_ParentForm.CNToolStripButton.Checked = False
+        'Me.m_Map.CurrentTool = ToolConstants.miArrowTool
+        'Me.myMapTool = CBdTC.MapTools.None
+        'Me.m_ParentForm.ToolStripStatusLabel3.Text = ""
+
     End Sub
 End Class

@@ -23,8 +23,8 @@ Module myModule
 
     'Public myKHConnStr As String
 
-    Public myMapGst As String = "BanDo.gst"
-    Public myMapNhoGst As String = "BanDoNho.gst"
+    'Public myMapGst As String = "BanDo.gst"
+    'Public myMapNhoGst As String = "BanDoNho.gst"
     'Public myMap3DWOR As String = "Map3D.WOR"
     'Public myDoCaoCamera As String = "3000" 'Double = 3000
     'Public myXoayStep As Integer = 5
@@ -32,7 +32,8 @@ Module myModule
     '-- modBDTC --
     'Public myHienDanhSach As Boolean = True
 
-    Public myCoordSysType As Integer = 1
+    '-- modBanDo --
+    'Public myCoordSysType As Integer = 1
 
     Friend fBanDoNho As dlgBanDoNho
     Friend intMonitorW, intMonitorH As Integer
